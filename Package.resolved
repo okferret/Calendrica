@@ -1,0 +1,15 @@
+{
+  "originHash" : "1105084a8b3393f23ea2f446a8877361fb842435f6a115dbd4d41c3928eaa133",
+  "pins" : [
+    {
+      "identity" : "libical",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/okferret/libical.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c4998d89a71beb4c265d2c7ea9b4d6e0dbc2df8a"
+      }
+    }
+  ],
+  "version" : 3
+}
