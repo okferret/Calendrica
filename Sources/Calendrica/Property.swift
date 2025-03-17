@@ -5,7 +5,7 @@
 //  Created by okferret on 2025/3/14.
 //
 
-import UIKit
+import Foundation
 import libical
 
 /// Property

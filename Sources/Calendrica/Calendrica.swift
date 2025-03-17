@@ -1,7 +1,7 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-
+import Foundation
 import libical
 
 typealias icalcomponent = OpaquePointer
@@ -10,7 +10,7 @@ typealias icalparameter = OpaquePointer
 typealias icalvalue = OpaquePointer
 
 /// Wrap
-public struct Wrap<T> where T: RawRepresentable {
+public struct Wrap<T>: Hashable where T: RawRepresentable, T: Hashable {
     internal let rawValue: T
     internal init(rawValue: T) {
         self.rawValue = rawValue
@@ -42,3 +42,47 @@ internal func icalcomponent_find_all_properties(of cmpt: icalcomponent) -> Array
     }
     return properties
 }
+
+extension icalcomponent_kind: @retroactive Hashable {}
+
+extension icalproperty_kind: @retroactive Hashable {}
+extension icalproperty_action: @retroactive Hashable {}
+extension icalproperty_busytype: @retroactive Hashable {}
+extension icalproperty_carlevel: @retroactive Hashable {}
+extension icalproperty_class: @retroactive Hashable {}
+extension icalproperty_cmd: @retroactive Hashable {}
+extension icalproperty_method: @retroactive Hashable {}
+extension icalproperty_pollcompletion: @retroactive Hashable {}
+extension icalproperty_pollmode: @retroactive Hashable {}
+extension icalproperty_querylevel: @retroactive Hashable {}
+extension icalproperty_status: @retroactive Hashable {}
+extension icalproperty_taskmode: @retroactive Hashable {}
+extension icalproperty_transp: @retroactive Hashable {}
+extension icalproperty_xlicclass: @retroactive Hashable {}
+
+extension icalparameter_kind: @retroactive Hashable {}
+extension icalparameter_action: @retroactive Hashable {}
+extension icalparameter_cutype: @retroactive Hashable {}
+extension icalparameter_display: @retroactive Hashable {}
+extension icalparameter_enable: @retroactive Hashable {}
+extension icalparameter_encoding: @retroactive Hashable {}
+extension icalparameter_fbtype: @retroactive Hashable {}
+extension icalparameter_feature: @retroactive Hashable {}
+extension icalparameter_local: @retroactive Hashable {}
+extension icalparameter_partstat: @retroactive Hashable {}
+extension icalparameter_patchaction: @retroactive Hashable {}
+extension icalparameter_range: @retroactive Hashable {}
+extension icalparameter_related: @retroactive Hashable {}
+extension icalparameter_reltype: @retroactive Hashable {}
+extension icalparameter_required: @retroactive Hashable {}
+extension icalparameter_role: @retroactive Hashable {}
+extension icalparameter_rsvp: @retroactive Hashable {}
+extension icalparameter_scheduleagent: @retroactive Hashable {}
+extension icalparameter_scheduleforcesend: @retroactive Hashable {}
+extension icalparameter_stayinformed: @retroactive Hashable {}
+extension icalparameter_substate: @retroactive Hashable {}
+extension icalparameter_value: @retroactive Hashable {}
+extension icalparameter_xliccomparetype: @retroactive Hashable {}
+extension icalparameter_xlicerrortype: @retroactive Hashable {}
+
+extension icalvalue_kind: @retroactive Hashable {}

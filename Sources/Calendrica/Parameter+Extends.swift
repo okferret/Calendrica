@@ -5,6 +5,7 @@
 //  Created by okferret on 2025/3/17.
 //
 
+import Foundation
 import libical
 
 extension Parameter {

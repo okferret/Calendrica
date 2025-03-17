@@ -5,7 +5,7 @@
 //  Created by okferret on 2025/3/14.
 //
 
-import UIKit
+import Foundation
 import libical
 
 /// Parameter
@@ -52,12 +52,7 @@ public class Parameter: NSObject {
 }
 
 extension Parameter {
-    
-    public func add() {
-//        icalparameter_get_xlicerrortype(<#T##value: OpaquePointer!##OpaquePointer!#>)
-//        icalparameter_set_x(<#T##value: OpaquePointer!##OpaquePointer!#>, <#T##v: UnsafePointer<CChar>!##UnsafePointer<CChar>!#>)
-//        icalparameter_set_cn(<#T##value: OpaquePointer!##OpaquePointer!#>, <#T##v: UnsafePointer<CChar>!##UnsafePointer<CChar>!#>)
-    }
+
 }
 
 extension Parameter.Kind {
