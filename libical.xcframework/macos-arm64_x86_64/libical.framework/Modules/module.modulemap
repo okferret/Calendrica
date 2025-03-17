@@ -1,5 +1,0 @@
-module libical {
-    umbrella header "Headers/libical.h"
-    export *
-    link "libical"
-}

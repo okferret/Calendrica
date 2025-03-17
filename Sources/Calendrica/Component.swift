@@ -93,4 +93,3 @@ extension Component {
         return .init(utf8String: icalcomponent_as_ical_string(rawValue)) ?? ""
     }
 }
-

@@ -8,6 +8,8 @@ typealias icalcomponent = OpaquePointer
 typealias icalproperty = OpaquePointer
 typealias icalparameter = OpaquePointer
 typealias icalvalue = OpaquePointer
+typealias icaltimezone = OpaquePointer
+typealias icalattach = OpaquePointer
 
 extension icalcomponent_kind: @retroactive Hashable {}
 
@@ -53,6 +55,8 @@ extension icalparameter_xlicerrortype: @retroactive Hashable {}
 
 extension icalvalue_kind: @retroactive Hashable {}
 
+extension icalrequeststatus: @retroactive Hashable {}
+
 /// Wrap
 public struct Wrap<T>: Hashable where T: RawRepresentable, T: Hashable {
     internal let rawValue: T
@@ -86,3 +90,4 @@ internal func icalcomponent_find_all_properties(of cmpt: icalcomponent) -> Array
     }
     return properties
 }
+
