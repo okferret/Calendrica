@@ -21,7 +21,7 @@ public class Parameter: NSObject {
     // MARK: - 私有属性
     
     /// icalparameter
-    private let rawValue: icalparameter
+    internal let rawValue: icalparameter
     
     // MARK: - 生命周期
     
@@ -48,6 +48,15 @@ public class Parameter: NSObject {
         if icalparameter_isa(rawValue) != ICAL_NO_PARAMETER {
             icalparameter_free(rawValue)
         }
+    }
+}
+
+extension Parameter {
+    
+    public func add() {
+//        icalparameter_get_xlicerrortype(<#T##value: OpaquePointer!##OpaquePointer!#>)
+//        icalparameter_set_x(<#T##value: OpaquePointer!##OpaquePointer!#>, <#T##v: UnsafePointer<CChar>!##UnsafePointer<CChar>!#>)
+//        icalparameter_set_cn(<#T##value: OpaquePointer!##OpaquePointer!#>, <#T##v: UnsafePointer<CChar>!##UnsafePointer<CChar>!#>)
     }
 }
 

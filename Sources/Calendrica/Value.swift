@@ -21,7 +21,7 @@ public class Value: NSObject {
     // MARK: - 私有属性
     
     /// icalvalue
-    private let rawValue: icalvalue
+    internal let rawValue: icalvalue
     
     // MARK: - 生命周期
     
