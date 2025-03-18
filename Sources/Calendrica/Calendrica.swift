@@ -193,7 +193,7 @@ func icalproperty_find_first_parameter(of property: icalproperty, kind: Paramete
 /// 解析
 /// - Parameter rfc5545: String
 /// - Returns: Component
-public func parse<T>(rfc5545: String) throws -> T where T: Component {
+public func parse<T>(_ rfc5545: String) throws -> T where T: Component {
     guard let cmpt: icalcomponent = icalparser_parse_string(rfc5545) else {
         throw CalError.custom("RFC5545 解析失败")
     }

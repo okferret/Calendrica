@@ -72,6 +72,13 @@ public class Component: NSObject {
 
 extension Component {
     
+    /// parseBody
+    /// - Parameter rfc5545: String
+    /// - Returns: Component
+    public static func parseBody<T>(_ rfc5545: String) throws -> T where T: Component {
+        return try parse(rfc5545)
+    }
+    
     /// add child
     /// - Parameter child: Component
     /// - Returns: Component
