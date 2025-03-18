@@ -45,7 +45,6 @@ public class Parameter: NSObject {
     deinit {
         if icalparameter_isa(rawValue) != ICAL_NO_PARAMETER {
             icalparameter_free(rawValue)
-            icalparameter_get_value(<#T##value: OpaquePointer!##OpaquePointer!#>)
         }
     }
 }
