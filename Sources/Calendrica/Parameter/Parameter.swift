@@ -16,10 +16,17 @@ public class Parameter: NSObject {
     /// Kind
     public var kind: Kind { .init(rawValue: icalparameter_isa(rawValue)) }
     
+    /// Optional<Any>
+    public var value: Optional<Any> {
+        get { getValue() }
+        set { setValue(newValue) }
+    }
+    
     /// String
     public override var description: String {
         return icalparameter_as_ical_string(rawValue).hub.wrap()
     }
+   
     
     // MARK: - 私有属性
     
@@ -53,27 +60,16 @@ extension Parameter {
   
     /// value
     /// - Returns: Optional<T>
-    public func value<T>() -> Optional<T> {
+    public func getValue<T>() -> Optional<T> {
         return value(kind: kind) as? T
     }
-    
-    /// value
-    /// - Returns: Optional<Any>
-    public func value() -> Optional<Any> {
-        return value(kind: kind)
-    }
-    
+
     /// setValue
     /// - Parameter value: T
     public func setValue<T>(_ value: T) {
         setValue(value, kind: kind)
     }
-    
-    /// setValue
-    /// - Parameter value: Any
-    public func setValue(_ value: Any) {
-        setValue(value, kind: kind)
-    }
+   
 }
 
 extension Parameter {
@@ -448,9 +444,9 @@ extension Parameter {
     
     /// setValue
     /// - Parameters:
-    ///   - value: Any
+    ///   - value: Optional<Any>
     ///   - kind: Kind
-    private func setValue(_ value: Any, kind: Kind) {
+    private func setValue(_ value: Optional<Any>, kind: Kind) {
         switch (kind, value) {
         case (.ACTIONPARAM, let value as Parameter.Action):                     icalparameter_set_actionparam(rawValue, value.rawValue)
         case (.ALTREP, let value as String):                                    icalparameter_set_altrep(rawValue, value)

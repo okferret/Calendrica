@@ -65,7 +65,6 @@ public class Component: NSObject {
         if icalcomponent_get_parent(rawValue) == .none {
             icalcomponent_free(rawValue)
         }
-        print(#function, (#file as NSString).lastPathComponent)
     }
    
 }

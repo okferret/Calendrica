@@ -22,6 +22,12 @@ public class Property: NSObject {
         return icalproperty_find_all_parameters(of: rawValue, kind: .ANY)
     }
     
+    /// Optional<Any>
+    public var value: Optional<Any> {
+        get { getValue() }
+        set { setValue(newValue) }
+    }
+    
     /// String
     public override var description: String {
         return icalproperty_as_ical_string(rawValue).hub.wrap()
@@ -105,27 +111,16 @@ extension Property {
     
     /// value
     /// - Returns: Optional<T>
-    public func value<T>() -> Optional<T> {
+    public func getValue<T>() -> Optional<T> {
         return value(kind: kind) as? T
     }
-    
-    /// value
-    /// - Returns: Optional<Any>
-    public func value() -> Optional<Any> {
-        return value(kind: kind)
-    }
-    
+  
     /// setValue
     /// - Parameter value: T
     public func setValue<T>(_ value: T) {
         setValue(value, kind: kind)
     }
     
-    /// setValue
-    /// - Parameter value: Any
-    public func setValue(_ value: Any) {
-        setValue(value, kind: kind)
-    }
 }
 
 extension Property {
@@ -1007,9 +1002,9 @@ extension Property {
     
     /// setValue
     /// - Parameters:
-    ///   - value: Any
+    ///   - value: Optional<Any>
     ///   - kind: Kind
-    private func setValue(_ value: Any, kind: Kind) {
+    private func setValue(_ value: Optional<Any>, kind: Kind) {
         switch (kind, value) {
         case (.ACCEPTRESPONSE, let value as String):                    icalproperty_set_acceptresponse(rawValue, value)
         case (.ACKNOWLEDGED, let value as Date):                        icalproperty_set_acknowledged(rawValue, value.hub.icaltimetype())
