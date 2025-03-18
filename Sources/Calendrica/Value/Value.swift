@@ -46,7 +46,7 @@ public class Value: NSObject {
     }
     
     deinit {
-        if icalvalue_isa(rawValue) != ICAL_NO_VALUE {
+        if icalvalue_get_parent(rawValue) == .none {
             icalvalue_free(rawValue)
         }
     }

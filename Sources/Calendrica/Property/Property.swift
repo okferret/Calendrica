@@ -22,6 +22,11 @@ public class Property: NSObject {
         return icalproperty_find_all_parameters(of: rawValue).map { .init(rawValue: $0) }
     }
     
+    /// String
+    public override var description: String {
+        return rfc5545()
+    }
+    
     // MARK: - 私有属性
     
     /// icalproperty
@@ -49,7 +54,7 @@ public class Property: NSObject {
     }
     
     deinit {
-        if icalproperty_isa(rawValue) != ICAL_NO_PROPERTY {
+        if icalproperty_get_parent(rawValue) == .none {
             icalproperty_free(rawValue)
         }
     }
@@ -57,10 +62,13 @@ public class Property: NSObject {
 
 extension Property {
     
-    /// add
+    /// add parameter
     /// - Parameter parameter: Parameter
-    public func add(_ parameter: Parameter) {
+    /// - Returns: Parameter
+    @discardableResult
+    public func add(_ parameter: Parameter) -> Parameter {
         icalproperty_add_parameter(rawValue, parameter.rawValue)
+        return parameter
     }
     
     /// remove

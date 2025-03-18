@@ -6,6 +6,7 @@
 //
 
 import libical
+import Foundation
 
 extension Date: CompatibleValue {}
 extension CompatibleWrapper where Base == Date {

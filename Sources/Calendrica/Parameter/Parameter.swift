@@ -16,6 +16,11 @@ public class Parameter: NSObject {
     /// Kind
     public var kind: Kind { .init(rawValue: icalparameter_isa(rawValue)) }
     
+    /// String
+    public override var description: String {
+        return rfc5545()
+    }
+    
     // MARK: - 私有属性
     
     /// icalparameter
@@ -41,15 +46,16 @@ public class Parameter: NSObject {
     public convenience init(kind: Kind) {
         self.init(rawValue: icalparameter_new(kind.rawValue))
     }
-    
-    deinit {
-        if icalparameter_isa(rawValue) != ICAL_NO_PARAMETER {
-            icalparameter_free(rawValue)
-        }
-    }
+   
 }
 
 extension Parameter {
+    
+    /// rfc5545
+    /// - Returns: String
+    public func rfc5545() -> String {
+        return .init(utf8String: icalproperty_as_ical_string(rawValue)) ?? ""
+    }
     
     /// value
     /// - Returns: Optional<T>

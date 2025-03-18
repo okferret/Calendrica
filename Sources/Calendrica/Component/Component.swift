@@ -20,12 +20,17 @@ public class Component: NSObject {
     
     /// Array<Component>
     public var children: Array<Component> {
-        return icalcomponent_find_all_components(of: rawValue).map { .init(rawValue: $0) }
+        return icalcomponent_find_children(of: rawValue)
     }
     
     /// Array<Property>
     public var properties: Array<Property> {
         return icalcomponent_find_all_properties(of: rawValue).map { .init(rawValue: $0) }
+    }
+    
+    /// String
+    public override var description: String {
+        return rfc5545()
     }
     
     // MARK: - 私有属性
@@ -44,29 +49,36 @@ public class Component: NSObject {
     
     /// 构建
     /// - Parameter rfc5545: String
-    public convenience init(rfc5545: String) {
-        self.init(rawValue: icalcomponent_new_from_string(rfc5545))
+    internal init(rfc5545: String) {
+        self.rawValue = icalcomponent_new_from_string(rfc5545)
+        super.init()
     }
     
     /// 构建
     /// - Parameter kind: Kind
-    public convenience init(kind: Kind) {
-        self.init(rawValue: icalcomponent_new(kind.rawValue))
+    internal init(kind: Kind) {
+        self.rawValue = icalcomponent_new(kind.rawValue)
+        super.init()
     }
     
     deinit {
-        if icalcomponent_isa(rawValue) != ICAL_NO_COMPONENT {
+        if icalcomponent_get_parent(rawValue) == .none {
             icalcomponent_free(rawValue)
         }
+        print(#function, (#file as NSString).lastPathComponent)
     }
+   
 }
 
 extension Component {
     
     /// add child
     /// - Parameter child: Component
-    public func add(_ child: Component) {
+    /// - Returns: Component
+    @discardableResult
+    public func add(_ child: Component) -> Component {
         icalcomponent_add_component(rawValue, child.rawValue)
+        return child
     }
     
     /// remove child
@@ -75,16 +87,52 @@ extension Component {
         icalcomponent_remove_component(rawValue, child.rawValue)
     }
     
-    /// add property
+    /// addProperty
     /// - Parameter property: Property
-    public func add(_ property: Property) {
+    /// - Returns: Property
+    @discardableResult
+    public func addProperty(_ property: Property) -> Property {
         icalcomponent_add_property(rawValue, property.rawValue)
+        return property
     }
      
     /// remove property
     /// - Parameter property: Property
-    public func remove(_ property: Property) {
+    public func rmProperty(_ property: Property) {
         icalcomponent_remove_property(rawValue, property.rawValue)
+    }
+    
+    /// rmProperty by kind
+    /// - Parameter kind: Property.Kind
+    public func rmProperty(by kind: Property.Kind) {
+        icalcomponent_find_all_properties(of: rawValue, kind: kind.rawValue).forEach {
+            icalcomponent_remove_property(rawValue, $0)
+        }
+    }
+    
+    /// children of kind
+    /// - Parameter kind: Component.Kind
+    /// - Returns: Array<Component>
+    public func children<T>(of kind: Component.Kind) -> Array<T> where T: Component {
+        return icalcomponent_find_children(of: rawValue, kind: kind).compactMap { $0 as? T }
+    }
+    
+    /// child of kind
+    /// - Parameter kind: Component.Kind
+    /// - Returns: Optional<Component>
+    public func child<T>(of kind: Component.Kind) -> Optional<T> where T: Component {
+        return icalcomponent_find_children(of: rawValue, kind: kind).first as? T
+    }
+    
+    /// property by kind
+    /// - Parameter kind: Property.Kind
+    /// - Returns: Optional<Property>
+    public func property(by kind: Property.Kind) -> Optional<Property> {
+        if let first = icalcomponent_get_first_property(rawValue, kind.rawValue) {
+            return .init(rawValue: first)
+        } else {
+            return .none
+        }
     }
     
     /// rfc5545
@@ -92,23 +140,5 @@ extension Component {
     public func rfc5545() -> String {
         return .init(utf8String: icalcomponent_as_ical_string(rawValue)) ?? ""
     }
-    
-    /// count
-    /// - Parameter kind: Component.Kind
-    /// - Returns: Int
-    public func count(of kind: Component.Kind) -> Int {
-        return icalcomponent_count_components(rawValue, kind.rawValue).hub.wrap()
-    }
-    
-    /// count of
-    /// - Parameter kind: Property.Kind
-    /// - Returns: Int
-    public func count(of kind: Property.Kind) -> Int {
-        return icalcomponent_count_properties(rawValue, kind.rawValue).hub.wrap()
-    }
-}
-
-extension Component {
-
     
 }
