@@ -17,6 +17,11 @@ public class Property: NSObject {
     /// Kind
     public var kind: Kind { .init(rawValue: icalproperty_isa(rawValue)) }
     
+    /// Array<Parameter>
+    public var parameters: Array<Parameter> {
+        return icalproperty_find_all_parameters(of: rawValue).map { .init(rawValue: $0) }
+    }
+    
     // MARK: - 私有属性
     
     /// icalproperty

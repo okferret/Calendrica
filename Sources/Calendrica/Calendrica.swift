@@ -68,7 +68,7 @@ public struct Wrap<T>: Hashable where T: RawRepresentable, T: Hashable {
 /// icalcomponent_find_all_component
 /// - Parameter parent: icalcomponent
 /// - Returns: Array<icalcomponent>
-internal func icalcomponent_find_all_components(of parent: icalcomponent) -> Array<icalcomponent> {
+func icalcomponent_find_all_components(of parent: icalcomponent) -> Array<icalcomponent> {
     var cmpts: Array<icalcomponent> = []
     var next: Optional<icalcomponent> = icalcomponent_get_first_component(parent, ICAL_ANY_COMPONENT)
     while let cmpt = next {
@@ -81,7 +81,7 @@ internal func icalcomponent_find_all_components(of parent: icalcomponent) -> Arr
 /// icalcomponent_find_all_properties
 /// - Parameter cmpt: icalcomponent
 /// - Returns: Array<icalproperty>
-internal func icalcomponent_find_all_properties(of cmpt: icalcomponent) -> Array<icalproperty> {
+func icalcomponent_find_all_properties(of cmpt: icalcomponent) -> Array<icalproperty> {
     var properties: Array<icalproperty> = []
     var next: Optional<icalproperty> = icalcomponent_get_first_property(cmpt, ICAL_ANY_PROPERTY)
     while let property = next {
@@ -91,3 +91,15 @@ internal func icalcomponent_find_all_properties(of cmpt: icalcomponent) -> Array
     return properties
 }
 
+/// icalproperty_find_all_parameters
+/// - Parameter property: icalproperty
+/// - Returns: Array<icalparameter>
+func icalproperty_find_all_parameters(of property: icalproperty) -> Array<icalparameter> {
+    var parameters: Array<icalparameter> = []
+    var next: Optional<icalparameter> = icalproperty_get_first_parameter(property, ICAL_ANY_PARAMETER)
+    while let parameter = next {
+        parameters += [parameter]
+        next = icalproperty_get_next_parameter(property, ICAL_ANY_PARAMETER)
+    }
+    return parameters
+}

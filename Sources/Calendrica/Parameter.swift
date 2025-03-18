@@ -28,6 +28,7 @@ public class Parameter: NSObject {
     internal init(rawValue: icalparameter) {
         self.rawValue = rawValue
         super.init()
+        icalparameter_get_x(<#T##value: OpaquePointer!##OpaquePointer!#>)
     }
     
     /// 构建
