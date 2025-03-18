@@ -94,6 +94,14 @@ extension Component {
         icalcomponent_remove_component(rawValue, component.rawValue)
     }
     
+    /// remove
+    /// - Parameter kind: Component.Kind
+    public func remove(by kind: Component.Kind) {
+        icalcomponent_find_all_components(of: rawValue, kind: kind).forEach {
+            icalcomponent_remove_component(rawValue, $0.rawValue)
+        }
+    }
+    
     /// addProperty
     /// - Parameter property: Property
     /// - Returns: Property

@@ -164,7 +164,6 @@ extension Parameter.Kind {
     public static var XLICERRORTYPE: Parameter.Kind { .init(rawValue: ICAL_XLICERRORTYPE_PARAMETER) }
 }
 
-
 extension Parameter.Action {
     /// ICAL_ACTIONPARAM_X
     public static var X: Parameter.Action { .init(rawValue: ICAL_ACTIONPARAM_X) }

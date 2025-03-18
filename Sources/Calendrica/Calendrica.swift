@@ -57,14 +57,6 @@ extension icalvalue_kind: @retroactive Hashable {}
 
 extension icalrequeststatus: @retroactive Hashable {}
 
-/// Wrap
-public struct Wrap<T>: Hashable where T: RawRepresentable, T: Hashable {
-    internal let rawValue: T
-    internal init(rawValue: T) {
-        self.rawValue = rawValue
-    }
-}
-
 /// icalcomponent_wrap
 /// - Parameter root: icalcomponent
 /// - Returns: Component
@@ -116,7 +108,7 @@ func icalcomponent_find_all_components(of parent: icalcomponent, kind: Component
     var next: Optional<icalcomponent> = icalcomponent_get_first_component(parent, kind.rawValue)
     while let cmpt = next {
         cmpts += [icalcomponent_wrap(cmpt)]
-        next = icalcomponent_get_next_component(parent, ICAL_ANY_COMPONENT)
+        next = icalcomponent_get_next_component(parent, kind.rawValue)
     }
     return cmpts
 }
@@ -144,7 +136,7 @@ func icalcomponent_find_all_properties(of cmpt: icalcomponent, kind: Property.Ki
     var next: Optional<icalproperty> = icalcomponent_get_first_property(cmpt, kind.rawValue)
     while let rawValue = next {
         properties += [.init(rawValue: rawValue)]
-        next = icalcomponent_get_next_property(cmpt, ICAL_ANY_PROPERTY)
+        next = icalcomponent_get_next_property(cmpt, kind.rawValue)
     }
     return properties
 }
@@ -170,7 +162,7 @@ func icalproperty_find_all_parameters(of property: icalproperty, kind: Parameter
     var next: Optional<icalparameter> = icalproperty_get_first_parameter(property, kind.rawValue)
     while let rawValue = next {
         parameters += [.init(rawValue: rawValue)]
-        next = icalproperty_get_next_parameter(property, ICAL_ANY_PARAMETER)
+        next = icalproperty_get_next_parameter(property, kind.rawValue)
     }
     return parameters
 }
