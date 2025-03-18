@@ -81,6 +81,18 @@ extension Property {
     public func rfc5545() -> String {
         return .init(utf8String: icalproperty_as_ical_string(rawValue)) ?? ""
     }
+    
+    /// value
+    /// - Returns: Optional<T>
+    public func value<T>() -> Optional<T> {
+        return value(for: kind) as? T
+    }
+    
+    /// setValue
+    /// - Parameter value: T
+    public func setValue<T>(_ value: T) {
+        setValue(value, kind: kind)
+    }
 }
 
 extension Property {
@@ -827,15 +839,10 @@ extension Property {
 }
 
 extension Property {
-    
-    /// value
-    /// - Returns: Optional<T>
-    public func value<T>() -> Optional<T> {
-        return _value as? T
-    }
+
     
     /// Optional<Any>
-    private var _value: Optional<Any> {
+    private func value(for kind: Kind) -> Optional<Any> {
         switch kind {
         case .ACCEPTRESPONSE:       return icalproperty_get_acceptresponse(rawValue).hub.wrap()
         case .ACKNOWLEDGED:         return icalproperty_get_acknowledged(rawValue).hub.wrap()
@@ -961,6 +968,156 @@ extension Property {
         case .ATTACH:               return Attachment.hub.from(icalproperty_get_attach(rawValue))
         case .IMAGE:                return Attachment(rawValue: icalproperty_get_image(rawValue))
         default:                    return .none
+        }
+    }
+    
+    /// setValue
+    /// - Parameters:
+    ///   - value: Any
+    ///   - kind: Kind
+    private func setValue(_ value: Any, kind: Kind) {
+        switch (kind, value) {
+        case (.ACCEPTRESPONSE, let value as String):                    icalproperty_set_acceptresponse(rawValue, value)
+        case (.ACKNOWLEDGED, let value as Date):                        icalproperty_set_acknowledged(rawValue, value.hub.icaltimetype())
+        case (.ACTION, let value as Property.Action):                   icalproperty_set_action(rawValue, value.rawValue)
+        case (.ALLOWCONFLICT, let value as String):                     icalproperty_set_allowconflict(rawValue, value)
+        case (.ATTACH, let value as Attachment):                        icalproperty_set_attach(rawValue, value.hub.icalattach())
+        case (.ATTENDEE, let value as String):                          icalproperty_set_attendee(rawValue, value)
+        case (.BUSYTYPE, let value as Property.BusyType):               icalproperty_set_busytype(rawValue, value.rawValue)
+        case (.CALID, let  value as String):                            icalproperty_set_calid(rawValue, value)
+        case (.CALMASTER, let value as String):                         icalproperty_set_calmaster(rawValue, value)
+        case (.CALSCALE, let value as String):                          icalproperty_set_calscale(rawValue, value)
+        case (.CAPVERSION, let value as String):                        icalproperty_set_capversion(rawValue, value)
+        case (.CARLEVEL, let value as Property.CarLevel):               icalproperty_set_carlevel(rawValue, value.rawValue)
+        case (.CARID, let value as String):                             icalproperty_set_carid(rawValue, value)
+        case (.CATEGORIES, let value as String):                        icalproperty_set_categories(rawValue, value)
+        case (.CLASS, let value as Property.Class):                     icalproperty_set_class(rawValue, value.rawValue)
+        case (.CMD, let value as Property.Command):                     icalproperty_set_cmd(rawValue, value.rawValue)
+        case (.COLOR, let value as String):                             icalproperty_set_color(rawValue, value)
+        case (.COMMENT, let value as String):                           icalproperty_set_comment(rawValue, value)
+        case (.COMPLETED, let value as Date):                           icalproperty_set_completed(rawValue, value.hub.icaltimetype())
+        case (.COMPONENTS, let value as String):                        icalproperty_set_components(rawValue, value)
+        case (.CONFERENCE, let value as String):                        icalproperty_set_conference(rawValue, value)
+        case (.CONTACT, let value as String):                           icalproperty_set_contact(rawValue, value)
+        case (.CREATED, let value as Date):                             icalproperty_set_created(rawValue, value.hub.icaltimetype())
+        case (.CSID, let value as String):                              icalproperty_set_csid(rawValue, value)
+        case (.DATEMAX, let value as Date):                             icalproperty_set_datemax(rawValue, value.hub.icaltimetype())
+        case (.DATEMIN, let value as Date):                             icalproperty_set_datemin(rawValue, value.hub.icaltimetype())
+        case (.DECREED, let value as String):                           icalproperty_set_decreed(rawValue, value)
+        case (.DEFAULTCHARSET, let value as String):                    icalproperty_set_defaultcharset(rawValue, value)
+        case (.DEFAULTLOCALE, let value as String):                     icalproperty_set_defaultlocale(rawValue, value)
+        case (.DEFAULTTZID, let value as String):                       icalproperty_set_defaulttzid(rawValue, value)
+        case (.DEFAULTVCARS, let value as String):                      icalproperty_set_defaultvcars(rawValue, value)
+        case (.DENY, let value as String):                              icalproperty_set_deny(rawValue, value)
+        case (.DESCRIPTION, let value as String):                       icalproperty_set_description(rawValue, value)
+        case (.DTEND, let value as Date):                               icalproperty_set_dtend(rawValue, value.hub.icaltimetype())
+        case (.DTSTAMP, let value as Date):                             icalproperty_set_dtstamp(rawValue, value.hub.icaltimetype())
+        case (.DTSTART, let value as Date):                             icalproperty_set_dtstart(rawValue, value.hub.icaltimetype())
+        case (.DUE, let value as Date):                                 icalproperty_set_due(rawValue, value.hub.icaltimetype())
+        case (.DURATION, let value as Duration):                        icalproperty_set_duration(rawValue, value.hub.icaldurationtype())
+        case (.ESTIMATEDDURATION, let value as Duration):               icalproperty_set_estimatedduration(rawValue, value.hub.icaldurationtype())
+        case (.EXDATE, let value as Date):                              icalproperty_set_exdate(rawValue, value.hub.icaltimetype())
+        case (.EXPAND, let value as Int):                               icalproperty_set_expand(rawValue, Int32(value))
+        case (.EXPAND, let value as Int32):                             icalproperty_set_expand(rawValue, value)
+        case (.EXRULE, let value as icalrecurrencetype):                icalproperty_set_exrule(rawValue, value)
+        case (.FREEBUSY, let value as PeriodType):                      icalproperty_set_freebusy(rawValue, value.hub.icalperiodtype())
+        case (.GEO, let value as CLLocationCoordinate2D):               icalproperty_set_geo(rawValue, value.hub.icalgeotype())
+        case (.GRANT, let value as String):                             icalproperty_set_grant(rawValue, value)
+        case (.IMAGE, let value as Attachment):                         icalproperty_set_image(rawValue, value.hub.icalattach())
+        case (.ITIPVERSION, let value as String):                       icalproperty_set_itipversion(rawValue, value)
+        case (.LASTMODIFIED, let value as Date):                        icalproperty_set_lastmodified(rawValue, value.hub.icaltimetype())
+        case (.LOCATION, let value as String):                          icalproperty_set_location(rawValue, value)
+        case (.MAXCOMPONENTSIZE, let value as Int):                     icalproperty_set_maxcomponentsize(rawValue, Int32(value))
+        case (.MAXCOMPONENTSIZE, let value as Int32):                   icalproperty_set_maxcomponentsize(rawValue, value)
+        case (.MAXDATE, let value as Date):                             icalproperty_set_maxdate(rawValue, value.hub.icaltimetype())
+        case (.MAXRESULTS, let value as Int):                           icalproperty_set_maxresults(rawValue, Int32(value))
+        case (.MAXRESULTS, let value as Int32):                         icalproperty_set_maxresults(rawValue, value)
+        case (.MAXRESULTSSIZE, let value as Int):                       icalproperty_set_maxresultssize(rawValue, Int32(value))
+        case (.MAXRESULTSSIZE, let value as Int32):                     icalproperty_set_maxresultssize(rawValue, value)
+        case (.METHOD, let value as Property.Method):                   icalproperty_set_method(rawValue, value.rawValue)
+        case (.MINDATE, let value as Date):                             icalproperty_set_mindate(rawValue, value.hub.icaltimetype())
+        case (.MULTIPART, let value as String):                         icalproperty_set_multipart(rawValue, value)
+        case (.NAME, let value as String):                              icalproperty_set_name(rawValue, value)
+        case (.ORGANIZER, let value as String):                         icalproperty_set_organizer(rawValue, value)
+        case (.OWNER, let value as String):                             icalproperty_set_owner(rawValue, value)
+        case (.PATCHDELETE, let value as String):                       icalproperty_set_patchdelete(rawValue, value)
+        case (.PATCHORDER, let value as Int):                           icalproperty_set_patchorder(rawValue, Int32(value))
+        case (.PATCHORDER, let value as Int32):                         icalproperty_set_patchorder(rawValue, value)
+        case (.PATCHPARAMETER, let value as String):                    icalproperty_set_patchparameter(rawValue, value)
+        case (.PATCHTARGET, let value as String):                       icalproperty_set_patchtarget(rawValue, value)
+        case (.PATCHVERSION, let value as String):                      icalproperty_set_patchversion(rawValue, value)
+        case (.PERCENTCOMPLETE, let value as Int):                      icalproperty_set_percentcomplete(rawValue, Int32(value))
+        case (.PERCENTCOMPLETE, let value as Int32):                    icalproperty_set_percentcomplete(rawValue, value)
+        case (.PERMISSION, let value as String):                        icalproperty_set_permission(rawValue, value)
+        case (.POLLCOMPLETION, let value as Property.PollCompletion):   icalproperty_set_pollcompletion(rawValue, value.rawValue)
+        case (.POLLITEMID, let value as Int):                           icalproperty_set_pollitemid(rawValue, Int32(value))
+        case (.POLLITEMID, let value as Int32):                         icalproperty_set_pollitemid(rawValue, value)
+        case (.POLLMODE, let value as Property.PollMode):               icalproperty_set_pollmode(rawValue, value.rawValue)
+        case (.POLLPROPERTIES, let value as String):                    icalproperty_set_pollproperties(rawValue, value)
+        case (.POLLWINNER, let value as Int):                           icalproperty_set_pollwinner(rawValue, Int32(value))
+        case (.POLLWINNER, let value as Int32):                         icalproperty_set_pollwinner(rawValue, value)
+        case (.PRIORITY, let value as Int):                             icalproperty_set_priority(rawValue, Int32(value))
+        case (.PRIORITY, let value as Int32):                           icalproperty_set_priority(rawValue, value)
+        case (.PRODID, let value as String):                            icalproperty_set_prodid(rawValue, value)
+        case (.QUERY, let value as String):                             icalproperty_set_query(rawValue, value)
+        case (.QUERYLEVEL, let value as Property.QueryLevel):           icalproperty_set_querylevel(rawValue, value.rawValue)
+        case (.QUERYID, let value as String):                           icalproperty_set_queryid(rawValue, value)
+        case (.QUERYNAME, let value as String):                         icalproperty_set_queryname(rawValue, value)
+        case (.RDATE, let value as DateTimePeriodType):                 icalproperty_set_rdate(rawValue, value.hub.icaldatetimeperiodtype())
+        case (.RECURACCEPTED, let value as String):                     icalproperty_set_recuraccepted(rawValue, value)
+        case (.RECUREXPAND, let value as String):                       icalproperty_set_recurexpand(rawValue, value)
+        case (.RECURLIMIT, let value as String):                        icalproperty_set_recurlimit(rawValue, value)
+        case (.RECURRENCEID, let value as Date):                        icalproperty_set_recurrenceid(rawValue, value.hub.icaltimetype())
+        case (.REFRESHINTERVAL, let value as Duration):                 icalproperty_set_refreshinterval(rawValue, value.hub.icaldurationtype())
+        case (.RELATEDTO, let value as String):                         icalproperty_set_relatedto(rawValue, value)
+        case (.RELCALID, let value as String):                          icalproperty_set_relcalid(rawValue, value)
+        case (.REPEAT, let value as Int):                               icalproperty_set_repeat(rawValue, Int32(value))
+        case (.REPEAT, let value as Int32):                             icalproperty_set_repeat(rawValue, value)
+        case (.REPLYURL, let value as URL):                             icalproperty_set_replyurl(rawValue, value.absoluteString)
+        case (.REPLYURL, let value as String):                          icalproperty_set_replyurl(rawValue, value)
+        case (.REQUESTSTATUS, let value as icalreqstattype):            icalproperty_set_requeststatus(rawValue, value)
+        case (.RESOURCES, let value as String):                         icalproperty_set_resources(rawValue, value)
+        case (.RESPONSE, let value as Int):                             icalproperty_set_response(rawValue, Int32(value))
+        case (.RESPONSE, let value as Int32):                           icalproperty_set_response(rawValue, value)
+        case (.RESTRICTION, let value as String):                       icalproperty_set_restriction(rawValue, value)
+        case (.RRULE, let value as icalrecurrencetype):                 icalproperty_set_rrule(rawValue, value)
+        case (.SCOPE, let value as String):                             icalproperty_set_scope(rawValue, value)
+        case (.SEQUENCE, let value as Int):                             icalproperty_set_sequence(rawValue, Int32(value))
+        case (.SEQUENCE, let value as Int32):                           icalproperty_set_sequence(rawValue, value)
+        case (.SOURCE, let value as String):                            icalproperty_set_source(rawValue, value)
+        case (.STATUS, let value as Property.Status):                   icalproperty_set_status(rawValue, value.rawValue)
+        case (.STORESEXPANDED, let value as String):                    icalproperty_set_storesexpanded(rawValue, value)
+        case (.SUMMARY, let value as String):                           icalproperty_set_summary(rawValue, value)
+        case (.TARGET, let value as String):                            icalproperty_set_target(rawValue, value)
+        case (.TASKMODE, let value as Property.TaskMode):               icalproperty_set_taskmode(rawValue, value.rawValue)
+        case (.TRANSP, let value as Property.Transp):                   icalproperty_set_transp(rawValue, value.rawValue)
+        case (.TRIGGER, let value as TriggerType):                      icalproperty_set_trigger(rawValue, value.hub.icaltriggertype())
+        case (.TZID, let value as String):                              icalproperty_set_tzid(rawValue, value)
+        case (.TZIDALIASOF, let value as String):                       icalproperty_set_tzidaliasof(rawValue, value)
+        case (.TZNAME, let value as String):                            icalproperty_set_tzname(rawValue, value)
+        case (.TZOFFSETFROM, let value as Int):                         icalproperty_set_tzoffsetfrom(rawValue, Int32(value))
+        case (.TZOFFSETFROM, let value as Int32):                       icalproperty_set_tzoffsetfrom(rawValue, value)
+        case (.TZOFFSETTO, let value as Int):                           icalproperty_set_tzoffsetto(rawValue, Int32(value))
+        case (.TZOFFSETTO, let value as Int32):                         icalproperty_set_tzoffsetto(rawValue, value)
+        case (.TZUNTIL, let value as Date):                             icalproperty_set_tzuntil(rawValue, value.hub.icaltimetype())
+        case (.TZURL, let value as URL):                                icalproperty_set_tzurl(rawValue, value.absoluteString)
+        case (.TZURL, let value as String):                             icalproperty_set_tzurl(rawValue, value)
+        case (.UID, let value as String):                               icalproperty_set_uid(rawValue, value)
+        case (.URL, let value as URL):                                  icalproperty_set_url(rawValue, value.absoluteString)
+        case (.URL, let value as String):                               icalproperty_set_url(rawValue, value)
+        case (.VERSION, let value as String):                           icalproperty_set_version(rawValue, value)
+        case (.VOTER, let value as String):                             icalproperty_set_voter(rawValue, value)
+        case (.X, let value as String):                                 icalproperty_set_x(rawValue, value)
+        case (.XLICCLASS, let value as Property.XlicClass):             icalproperty_set_xlicclass(rawValue, value.rawValue)
+        case (.XLICCLUSTERCOUNT, let value as String):                  icalproperty_set_xlicclustercount(rawValue, value)
+        case (.XLICERROR, let value as String):                         icalproperty_set_xlicerror(rawValue, value)
+        case (.XLICMIMECHARSET, let value as String):                   icalproperty_set_xlicmimecharset(rawValue, value)
+        case (.XLICMIMECID, let value as String):                       icalproperty_set_xlicmimecid(rawValue, value)
+        case (.XLICMIMECONTENTTYPE, let value as String):               icalproperty_set_xlicmimecontenttype(rawValue, value)
+        case (.XLICMIMEENCODING, let value as String):                  icalproperty_set_xlicmimeencoding(rawValue, value)
+        case (.XLICMIMEFILENAME, let value as String):                  icalproperty_set_xlicmimefilename(rawValue, value)
+        case (.XLICMIMEOPTINFO, let value as String):                   icalproperty_set_xlicmimeoptinfo(rawValue, value)
+        default: break
         }
     }
 }
