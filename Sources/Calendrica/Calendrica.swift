@@ -65,28 +65,6 @@ public struct Wrap<T>: Hashable where T: RawRepresentable, T: Hashable {
     }
 }
 
-/// icalcomponent_find_all_component
-/// - Parameter parent: icalcomponent
-/// - Returns: Array<icalcomponent>
-func icalcomponent_find_all_components(of parent: icalcomponent, kind: icalcomponent_kind = ICAL_ANY_COMPONENT) -> Array<icalcomponent> {
-    var cmpts: Array<icalcomponent> = []
-    var next: Optional<icalcomponent> = icalcomponent_get_first_component(parent, kind)
-    while let cmpt = next {
-        cmpts += [cmpt]
-        next = icalcomponent_get_next_component(parent, ICAL_ANY_COMPONENT)
-    }
-    return cmpts
-}
-
-/// find_children
-/// - Parameter parent: icalcomponent
-/// - Returns: Array<Component>
-func icalcomponent_find_children(of parent: icalcomponent, kind: Component.Kind = .ANY) -> Array<Component> {
-    return icalcomponent_find_all_components(of: parent, kind: kind.rawValue).map {
-        return icalcomponent_wrap($0)
-    }
-}
-
 /// icalcomponent_wrap
 /// - Parameter root: icalcomponent
 /// - Returns: Component
@@ -128,30 +106,86 @@ func icalcomponent_wrap(_ root: icalcomponent) -> Component {
     }
 }
 
+/// icalcomponent_find_all_components
+/// - Parameters:
+///   - parent: icalcomponent
+///   - kind: Component.Kind
+/// - Returns: Array<Component>
+func icalcomponent_find_all_components(of parent: icalcomponent, kind: Component.Kind) -> Array<Component> {
+    var cmpts: Array<Component> = []
+    var next: Optional<icalcomponent> = icalcomponent_get_first_component(parent, kind.rawValue)
+    while let cmpt = next {
+        cmpts += [icalcomponent_wrap(cmpt)]
+        next = icalcomponent_get_next_component(parent, ICAL_ANY_COMPONENT)
+    }
+    return cmpts
+}
+
+/// icalcomponent_find_first_component
+/// - Parameters:
+///   - parent: icalcomponent
+///   - kind: Component.Kind
+/// - Returns: Optional<Component>
+func icalcomponent_find_first_component(of parent: icalcomponent, kind: Component.Kind) -> Optional<Component> {
+    if let first: icalcomponent = icalcomponent_get_first_component(parent, kind.rawValue) {
+        return icalcomponent_wrap(first)
+    } else {
+        return .none
+    }
+}
+
 /// icalcomponent_find_all_properties
-/// - Parameter cmpt: icalcomponent
-/// - Returns: Array<icalproperty>
-func icalcomponent_find_all_properties(of cmpt: icalcomponent, kind: icalproperty_kind = ICAL_ANY_PROPERTY) -> Array<icalproperty> {
-    var properties: Array<icalproperty> = []
-    var next: Optional<icalproperty> = icalcomponent_get_first_property(cmpt, kind)
-    while let property = next {
-        properties += [property]
+/// - Parameters:
+///   - cmpt: icalcomponent
+///   - kind: Property.Kind
+/// - Returns: Array<Property>
+func icalcomponent_find_all_properties(of cmpt: icalcomponent, kind: Property.Kind) -> Array<Property> {
+    var properties: Array<Property> = []
+    var next: Optional<icalproperty> = icalcomponent_get_first_property(cmpt, kind.rawValue)
+    while let rawValue = next {
+        properties += [.init(rawValue: rawValue)]
         next = icalcomponent_get_next_property(cmpt, ICAL_ANY_PROPERTY)
     }
     return properties
 }
 
+/// icalcomponent_find_first_property
+/// - Parameters:
+///   - cmpt: icalcomponent
+///   - kind: icalproperty_kind
+/// - Returns: Optional<icalproperty>
+func icalcomponent_find_first_property(of cmpt: icalcomponent, kind: Property.Kind) -> Optional<Property> {
+    if let first: icalproperty = icalcomponent_get_first_property(cmpt, kind.rawValue) {
+        return .init(rawValue: first)
+    } else {
+        return .none
+    }
+}
+
 /// icalproperty_find_all_parameters
 /// - Parameter property: icalproperty
 /// - Returns: Array<icalparameter>
-func icalproperty_find_all_parameters(of property: icalproperty) -> Array<icalparameter> {
-    var parameters: Array<icalparameter> = []
-    var next: Optional<icalparameter> = icalproperty_get_first_parameter(property, ICAL_ANY_PARAMETER)
-    while let parameter = next {
-        parameters += [parameter]
+func icalproperty_find_all_parameters(of property: icalproperty, kind: Parameter.Kind) -> Array<Parameter> {
+    var parameters: Array<Parameter> = []
+    var next: Optional<icalparameter> = icalproperty_get_first_parameter(property, kind.rawValue)
+    while let rawValue = next {
+        parameters += [.init(rawValue: rawValue)]
         next = icalproperty_get_next_parameter(property, ICAL_ANY_PARAMETER)
     }
     return parameters
+}
+
+/// icalproperty_find_first_parameter
+/// - Parameters:
+///   - property: icalproperty
+///   - kind: Parameter.Kind
+/// - Returns: Optional<Parameter>
+func icalproperty_find_first_parameter(of property: icalproperty, kind: Parameter.Kind) -> Optional<Parameter> {
+    if let first = icalproperty_get_first_parameter(property, kind.rawValue) {
+        return .init(rawValue: first)
+    } else {
+        return .none
+    }
 }
 
 // MARK: - 公开

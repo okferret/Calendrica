@@ -17,3 +17,13 @@ extension CompatibleWrapper where Base == UnsafePointer<CChar> {
     }
 }
 
+
+extension UnsafeMutablePointer: CompatibleValue {}
+extension CompatibleWrapper where Base == UnsafeMutablePointer<CChar> {
+    
+    /// wrap
+    /// - Returns: String
+    internal func wrap() -> String {
+        return .init(cString: base)
+    }
+}

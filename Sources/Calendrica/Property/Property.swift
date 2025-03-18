@@ -19,12 +19,12 @@ public class Property: NSObject {
     
     /// Array<Parameter>
     public var parameters: Array<Parameter> {
-        return icalproperty_find_all_parameters(of: rawValue).map { .init(rawValue: $0) }
+        return icalproperty_find_all_parameters(of: rawValue, kind: .ANY)
     }
     
     /// String
     public override var description: String {
-        return rfc5545()
+        return icalproperty_as_ical_string(rawValue).hub.wrap()
     }
     
     // MARK: - 私有属性
@@ -66,33 +66,41 @@ extension Property {
     /// - Parameter parameter: Parameter
     /// - Returns: Parameter
     @discardableResult
-    public func add(_ parameter: Parameter) -> Parameter {
+    public func addParameter(_ parameter: Parameter) -> Parameter {
         icalproperty_add_parameter(rawValue, parameter.rawValue)
         return parameter
     }
     
     /// remove
     /// - Parameter parameter: Parameter
-    public func remove(_ parameter: Parameter) {
+    public func rmParameter(_ parameter: Parameter) {
         icalproperty_remove_parameter_by_ref(rawValue, parameter.rawValue)
     }
     
     /// remove by kind
     /// - Parameter kind: Parameter.Kind
-    public func remove(by kind: Parameter.Kind) {
+    public func rmParameter(by kind: Parameter.Kind) {
         icalproperty_remove_parameter_by_kind(rawValue, kind.rawValue)
     }
     
     /// remove parameter by name
     /// - Parameter name: String
-    public func remove(by name: String) {
+    public func rmParameter(by name: String) {
         icalproperty_remove_parameter_by_name(rawValue, name)
     }
     
-    /// rfc5545
-    /// - Returns: String
-    public func rfc5545() -> String {
-        return .init(utf8String: icalproperty_as_ical_string(rawValue)) ?? ""
+    /// parameters of kind
+    /// - Parameter kind: Parameter.Kind
+    /// - Returns: Array<Parameter>
+    public func parameters(of kind: Parameter.Kind) -> Array<Parameter> {
+        return icalproperty_find_all_parameters(of: rawValue, kind: kind)
+    }
+    
+    /// parameter of kind
+    /// - Parameter kind: Parameter.Kind
+    /// - Returns: Optional<Parameter>
+    public func parameter(of kind: Parameter.Kind) -> Optional<Parameter> {
+        return icalproperty_find_first_parameter(of: rawValue, kind: kind)
     }
     
     /// value

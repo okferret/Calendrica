@@ -19,18 +19,18 @@ public class Component: NSObject {
     }
     
     /// Array<Component>
-    public var children: Array<Component> {
-        return icalcomponent_find_children(of: rawValue)
+    public var components: Array<Component> {
+        return icalcomponent_find_all_components(of: rawValue, kind: .ANY)
     }
     
     /// Array<Property>
     public var properties: Array<Property> {
-        return icalcomponent_find_all_properties(of: rawValue).map { .init(rawValue: $0) }
+        return icalcomponent_find_all_properties(of: rawValue, kind: .ANY)
     }
     
     /// String
     public override var description: String {
-        return rfc5545()
+        return icalcomponent_as_ical_string(rawValue).hub.wrap()
     }
     
     // MARK: - 私有属性
@@ -76,15 +76,15 @@ extension Component {
     /// - Parameter child: Component
     /// - Returns: Component
     @discardableResult
-    public func add(_ child: Component) -> Component {
-        icalcomponent_add_component(rawValue, child.rawValue)
-        return child
+    public func add(_ component: Component) -> Component {
+        icalcomponent_add_component(rawValue, component.rawValue)
+        return component
     }
     
     /// remove child
     /// - Parameter child: Component
-    public func remove(_ child: Component) {
-        icalcomponent_remove_component(rawValue, child.rawValue)
+    public func remove(_ component: Component) {
+        icalcomponent_remove_component(rawValue, component.rawValue)
     }
     
     /// addProperty
@@ -105,40 +105,41 @@ extension Component {
     /// rmProperty by kind
     /// - Parameter kind: Property.Kind
     public func rmProperty(by kind: Property.Kind) {
-        icalcomponent_find_all_properties(of: rawValue, kind: kind.rawValue).forEach {
-            icalcomponent_remove_property(rawValue, $0)
+        icalcomponent_find_all_properties(of: rawValue, kind: kind).forEach {
+            icalcomponent_remove_property(rawValue, $0.rawValue)
         }
     }
     
-    /// children of kind
+    /// components of kind
     /// - Parameter kind: Component.Kind
     /// - Returns: Array<Component>
-    public func children<T>(of kind: Component.Kind) -> Array<T> where T: Component {
-        return icalcomponent_find_children(of: rawValue, kind: kind).compactMap { $0 as? T }
+    public func components<T>(of kind: Component.Kind) -> Array<T> where T: Component {
+        return icalcomponent_find_all_components(of: rawValue, kind: kind).compactMap { $0 as? T }
     }
     
-    /// child of kind
+    /// component of kind
     /// - Parameter kind: Component.Kind
     /// - Returns: Optional<Component>
-    public func child<T>(of kind: Component.Kind) -> Optional<T> where T: Component {
-        return icalcomponent_find_children(of: rawValue, kind: kind).first as? T
+    public func component<T>(of kind: Component.Kind) -> Optional<T> where T: Component {
+        return icalcomponent_find_first_component(of: rawValue, kind: kind) as? T
     }
     
-    /// property by kind
+    /// property of kind
     /// - Parameter kind: Property.Kind
     /// - Returns: Optional<Property>
-    public func property(by kind: Property.Kind) -> Optional<Property> {
-        if let first = icalcomponent_get_first_property(rawValue, kind.rawValue) {
-            return .init(rawValue: first)
+    public func property(of kind: Property.Kind) -> Optional<Property> {
+        if let first = icalcomponent_find_first_property(of: rawValue, kind: kind) {
+            return first
         } else {
             return .none
         }
     }
     
-    /// rfc5545
-    /// - Returns: String
-    public func rfc5545() -> String {
-        return .init(utf8String: icalcomponent_as_ical_string(rawValue)) ?? ""
+    /// properties of kind
+    /// - Parameter kind: Property.Kind
+    /// - Returns: Array<Property>
+    public func properties(of kind: Property.Kind) -> Array<Property> {
+        return icalcomponent_find_all_properties(of: rawValue, kind: kind)
     }
     
 }

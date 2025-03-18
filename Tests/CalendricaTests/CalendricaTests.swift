@@ -16,12 +16,16 @@ import Foundation
     """
     
     let cmpt: VCalendar = try parse(rfc5545: newText)
-    if let first: VEvent = cmpt.child(of: .VEVENT) {
+    if let first: VEvent = cmpt.component(of: .VEVENT) {
         let p: Property = .init(attendee: "afsdasdddddd")
-        p.add(Parameter(email: "CJNCNCCCC@qq.com"))
-        p.add(Parameter(action: .ABORT))
+        p.addParameter(Parameter(email: "CJNCNCCCC@qq.com"))
+        p.addParameter(Parameter(action: .ABORT))
         first.addProperty(p)//.add(Parameter(role: .REQPARTICIPANT))
         first.addProperty(.init(due: Date.init()))
+        // cmpt.remove(first)
+        if let first: Parameter.Action = first.property(of: .ATTENDEE)?.parameter(of: .ACTIONPARAM)?.value() {
+            print(first)
+        }
     }
 
     print(cmpt)

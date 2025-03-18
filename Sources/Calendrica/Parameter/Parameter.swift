@@ -18,7 +18,7 @@ public class Parameter: NSObject {
     
     /// String
     public override var description: String {
-        return rfc5545()
+        return icalparameter_as_ical_string(rawValue).hub.wrap()
     }
     
     // MARK: - 私有属性
@@ -50,13 +50,7 @@ public class Parameter: NSObject {
 }
 
 extension Parameter {
-    
-    /// rfc5545
-    /// - Returns: String
-    public func rfc5545() -> String {
-        return .init(utf8String: icalproperty_as_ical_string(rawValue)) ?? ""
-    }
-    
+  
     /// value
     /// - Returns: Optional<T>
     public func value<T>() -> Optional<T> {
