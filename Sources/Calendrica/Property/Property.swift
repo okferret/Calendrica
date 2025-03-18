@@ -109,9 +109,21 @@ extension Property {
         return value(kind: kind) as? T
     }
     
+    /// value
+    /// - Returns: Optional<Any>
+    public func value() -> Optional<Any> {
+        return value(kind: kind)
+    }
+    
     /// setValue
     /// - Parameter value: T
     public func setValue<T>(_ value: T) {
+        setValue(value, kind: kind)
+    }
+    
+    /// setValue
+    /// - Parameter value: Any
+    public func setValue(_ value: Any) {
         setValue(value, kind: kind)
     }
 }
