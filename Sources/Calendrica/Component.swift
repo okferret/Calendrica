@@ -92,4 +92,23 @@ extension Component {
     public func rfc5545() -> String {
         return .init(utf8String: icalcomponent_as_ical_string(rawValue)) ?? ""
     }
+    
+    /// count
+    /// - Parameter kind: Component.Kind
+    /// - Returns: Int
+    public func count(of kind: Component.Kind) -> Int {
+        return icalcomponent_count_components(rawValue, kind.rawValue).hub.wrap()
+    }
+    
+    /// count of
+    /// - Parameter kind: Property.Kind
+    /// - Returns: Int
+    public func count(of kind: Property.Kind) -> Int {
+        return icalcomponent_count_properties(rawValue, kind.rawValue).hub.wrap()
+    }
+}
+
+extension Component {
+
+    
 }

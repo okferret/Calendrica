@@ -90,7 +90,7 @@ extension Property {
     /// value
     /// - Returns: Optional<T>
     public func value<T>() -> Optional<T> {
-        return value(for: kind) as? T
+        return value(kind: kind) as? T
     }
     
     /// setValue
@@ -844,10 +844,11 @@ extension Property {
 }
 
 extension Property {
-
     
-    /// Optional<Any>
-    private func value(for kind: Kind) -> Optional<Any> {
+    /// value
+    /// - Parameter kind: Kind
+    /// - Returns: Optional<Any>
+    private func value(kind: Kind) -> Optional<Any> {
         switch kind {
         case .ACCEPTRESPONSE:       return icalproperty_get_acceptresponse(rawValue).hub.wrap()
         case .ACKNOWLEDGED:         return icalproperty_get_acknowledged(rawValue).hub.wrap()

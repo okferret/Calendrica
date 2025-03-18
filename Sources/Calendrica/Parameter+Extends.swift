@@ -28,7 +28,7 @@ extension Parameter {
     /// Wrap<icalparameter_local>
     public typealias Local = Wrap<icalparameter_local>
     /// Wrap<icalparameter_partstat>
-    public typealias PartStat = Wrap<icalparameter_partstat>
+    public typealias Partstat = Wrap<icalparameter_partstat>
     /// Wrap<icalparameter_patchaction>
     public typealias PatchAction = Wrap<icalparameter_patchaction>
     /// Wrap<icalparameter_range>
@@ -50,7 +50,7 @@ extension Parameter {
     /// Wrap<icalparameter_stayinformed>
     public typealias StayInformed = Wrap<icalparameter_stayinformed>
     /// Wrap<icalparameter_substate>
-    public typealias SubState = Wrap<icalparameter_substate>
+    public typealias Substate = Wrap<icalparameter_substate>
     /// Wrap<icalparameter_value>
     public typealias Value = Wrap<icalparameter_value>
     /// Wrap<icalparameter_xliccomparetype>
@@ -278,27 +278,27 @@ extension Parameter.Local {
     public static var NONE: Parameter.Local { .init(rawValue: ICAL_LOCAL_NONE) }
 }
 
-extension Parameter.PartStat {
+extension Parameter.Partstat {
     /// ICAL_PARTSTAT_X
-    public static var X: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_X) }
+    public static var X: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_X) }
     /// ICAL_PARTSTAT_NEEDSACTION
-    public static var NEEDSACTION: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_NEEDSACTION) }
+    public static var NEEDSACTION: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_NEEDSACTION) }
     /// ICAL_PARTSTAT_ACCEPTED
-    public static var ACCEPTED: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_ACCEPTED) }
+    public static var ACCEPTED: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_ACCEPTED) }
     /// ICAL_PARTSTAT_DECLINED
-    public static var DECLINED: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_DECLINED) }
+    public static var DECLINED: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_DECLINED) }
     /// ICAL_PARTSTAT_TENTATIVE
-    public static var TENTATIVE: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_TENTATIVE) }
+    public static var TENTATIVE: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_TENTATIVE) }
     /// ICAL_PARTSTAT_DELEGATED
-    public static var DELEGATED: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_DELEGATED) }
+    public static var DELEGATED: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_DELEGATED) }
     /// ICAL_PARTSTAT_COMPLETED
-    public static var COMPLETED: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_COMPLETED) }
+    public static var COMPLETED: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_COMPLETED) }
     /// ICAL_PARTSTAT_INPROCESS
-    public static var INPROCESS: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_INPROCESS) }
+    public static var INPROCESS: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_INPROCESS) }
     /// ICAL_PARTSTAT_FAILED
-    public static var FAILED: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_FAILED) }
+    public static var FAILED: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_FAILED) }
     /// ICAL_PARTSTAT_NONE
-    public static var NONE: Parameter.PartStat { .init(rawValue: ICAL_PARTSTAT_NONE) }
+    public static var NONE: Parameter.Partstat { .init(rawValue: ICAL_PARTSTAT_NONE) }
 }
 
 extension Parameter.PatchAction {
@@ -423,17 +423,17 @@ extension Parameter.StayInformed {
     public static var NONE: Parameter.StayInformed { .init(rawValue: ICAL_STAYINFORMED_NONE) }
 }
 
-extension Parameter.SubState {
+extension Parameter.Substate {
     /// ICAL_SUBSTATE_X
-    public static var X: Parameter.SubState { .init(rawValue: ICAL_SUBSTATE_X) }
+    public static var X: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_X) }
     /// ICAL_SUBSTATE_OK
-    public static var OK: Parameter.SubState { .init(rawValue: ICAL_SUBSTATE_OK) }
+    public static var OK: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_OK) }
     /// ICAL_SUBSTATE_ERROR
-    public static var ERROR: Parameter.SubState { .init(rawValue: ICAL_SUBSTATE_ERROR) }
+    public static var ERROR: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_ERROR) }
     /// ICAL_SUBSTATE_SUSPENDED
-    public static var SUSPENDED: Parameter.SubState { .init(rawValue: ICAL_SUBSTATE_SUSPENDED) }
+    public static var SUSPENDED: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_SUSPENDED) }
     /// ICAL_SUBSTATE_NONE
-    public static var NONE: Parameter.SubState { .init(rawValue: ICAL_SUBSTATE_NONE) }
+    public static var NONE: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_NONE) }
 }
 
 extension Parameter.Value {

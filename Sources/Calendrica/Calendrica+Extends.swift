@@ -198,3 +198,233 @@ extension CompatibleWrapper where Base == icalproperty_xlicclass {
         return .init(rawValue: base)
     }
 }
+
+extension icalparameter_action: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_action {
+    
+    /// wrap
+    /// - Returns: Parameter.Action
+    internal func wrap() -> Parameter.Action {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_cutype: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_cutype {
+    
+    /// wrap
+    /// - Returns: Parameter.CuType
+    internal func wrap() -> Parameter.CuType {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_display: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_display {
+    
+    /// wrap
+    /// - Returns: Parameter.Display
+    internal func wrap() -> Parameter.Display {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_enable: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_enable {
+    
+    /// wrap
+    /// - Returns: Parameter.Enable
+    internal func wrap() -> Parameter.Enable {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_encoding: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_encoding {
+    
+    /// wrap
+    /// - Returns: Parameter.Encoding
+    internal func wrap() -> Parameter.Encoding {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_fbtype: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_fbtype {
+    
+    /// wrap
+    /// - Returns: Parameter.FbType
+    internal func wrap() -> Parameter.FbType {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_feature: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_feature {
+    
+    /// wrap
+    /// - Returns: Parameter.Feature
+    internal func wrap() -> Parameter.Feature {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_local: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_local {
+    
+    /// wrap
+    /// - Returns: Parameter.Local
+    internal func wrap() -> Parameter.Local {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_partstat: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_partstat {
+    
+    /// wrap
+    /// - Returns: Parameter.Partstat
+    internal func wrap() -> Parameter.Partstat {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_patchaction: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_patchaction {
+    
+    /// wrap
+    /// - Returns: Parameter.PatchAction
+    internal func wrap() -> Parameter.PatchAction {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_range: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_range {
+    
+    /// wrap
+    /// - Returns: Parameter.Range
+    internal func wrap() -> Parameter.Range {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_related: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_related {
+    
+    /// wrap
+    /// - Returns: Parameter.Related
+    internal func wrap() -> Parameter.Related {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_reltype: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_reltype {
+    
+    /// wrap
+    /// - Returns: Parameter.RelType
+    internal func wrap() -> Parameter.RelType {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_required: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_required {
+    
+    /// wrap
+    /// - Returns: Parameter.Required
+    internal func wrap() -> Parameter.Required {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_role: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_role {
+    
+    /// wrap
+    /// - Returns: Parameter.Role
+    internal func wrap() -> Parameter.Role {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_rsvp: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_rsvp {
+    
+    /// wrap
+    /// - Returns: Parameter.RSVP
+    internal func wrap() -> Parameter.RSVP {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_scheduleagent: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_scheduleagent {
+    
+    /// wrap
+    /// - Returns: Parameter.ScheduleAgent
+    internal func wrap() -> Parameter.ScheduleAgent {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_scheduleforcesend: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_scheduleforcesend {
+    
+    /// wrap
+    /// - Returns: Parameter.ScheduleForceSend
+    internal func wrap() -> Parameter.ScheduleForceSend {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_stayinformed: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_stayinformed {
+    
+    /// wrap
+    /// - Returns: Parameter.StayInformed
+    internal func wrap() -> Parameter.StayInformed {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_substate: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_substate {
+    
+    /// wrap
+    /// - Returns: Parameter.Substate
+    internal func wrap() -> Parameter.Substate {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_value: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_value {
+    
+    /// wrap
+    /// - Returns: Parameter.Value
+    internal func wrap() -> Parameter.Value {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_xliccomparetype: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_xliccomparetype {
+    
+    /// wrap
+    /// - Returns: Parameter.XlicCompareType
+    internal func wrap() -> Parameter.XlicCompareType {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalparameter_xlicerrortype: CompatibleValue {}
+extension CompatibleWrapper where Base == icalparameter_xlicerrortype {
+    
+    /// wrap
+    /// - Returns: Parameter.XlicErrorType
+    internal func wrap() -> Parameter.XlicErrorType {
+        return .init(rawValue: base)
+    }
+}
