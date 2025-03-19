@@ -10,9 +10,21 @@ import libical
 extension Component {
     /// Wrap<icalcomponent_kind>
     public typealias Kind = Wrap<icalcomponent_kind>
-    /// Key
-    public typealias Key = Kind
 }
+
+extension Component.Kind {
+    
+    /// 构建
+    /// - Parameter name: String
+    public init?(name: String) {
+        if let kind: icalcomponent_kind = .init(name: name) {
+            self.init(rawValue: kind)
+        } else {
+            return nil
+        }
+    }
+}
+
 
 extension Component.Kind {
     /// ICAL_ANY_COMPONENT
@@ -80,3 +92,4 @@ extension Component.Kind {
     /// ICAL_XPATCH_COMPONENT
     public static var XPATCH: Component.Kind { .init(rawValue: ICAL_XPATCH_COMPONENT) }
 }
+

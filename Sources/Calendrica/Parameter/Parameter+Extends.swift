@@ -11,8 +11,6 @@ import libical
 extension Parameter {
     /// Wrap<icalparameter_kind>
     public typealias Kind = Wrap<icalparameter_kind>
-    /// Key
-    public typealias Key = Kind
     /// Wrap<icalparameter_action>
     public typealias Action = Wrap<icalparameter_action>
     /// Wrap<icalparameter_cutype>
@@ -59,6 +57,19 @@ extension Parameter {
     public typealias XlicCompareType = Wrap<icalparameter_xliccomparetype>
     /// Wrap<icalparameter_xlicerrortype>
     public typealias XlicErrorType = Wrap<icalparameter_xlicerrortype>
+}
+
+extension Parameter.Kind {
+    
+    /// 构建
+    /// - Parameter name: String
+    public init?(name: String) {
+        if let kind: icalparameter_kind = .init(name: name) {
+            self.init(rawValue: kind)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.Kind {

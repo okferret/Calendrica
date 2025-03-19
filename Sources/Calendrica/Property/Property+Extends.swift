@@ -11,8 +11,6 @@ import libical
 extension Property {
     /// Wrap<icalproperty_kind>
     public typealias Kind = Wrap<icalproperty_kind>
-    /// Key
-    public typealias Key = Kind
     /// Wrap<icalproperty_action>
     public typealias Action = Wrap<icalproperty_action>
     /// Wrap<icalproperty_busytype>
@@ -39,6 +37,19 @@ extension Property {
     public typealias Transp = Wrap<icalproperty_transp>
     /// Wrap<icalproperty_xlicclass>
     public typealias XlicClass = Wrap<icalproperty_xlicclass>
+}
+
+extension Property.Kind {
+    
+    /// 构建
+    /// - Parameter name: String
+    public init?(name: String) {
+        if let kind: icalproperty_kind = .init(name: name) {
+            self.init(rawValue: kind)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.Kind {

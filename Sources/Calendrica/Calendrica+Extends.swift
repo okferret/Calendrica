@@ -11,7 +11,6 @@ import CoreLocation
 
 extension icaltimetype: CompatibleValue {}
 extension CompatibleWrapper where Base == icaltimetype {
-    
     /// wrap
     /// - Returns: Date
     internal func wrap() -> Date {
@@ -19,59 +18,8 @@ extension CompatibleWrapper where Base == icaltimetype {
     }
 }
 
-extension icalproperty_action: CompatibleValue {}
-extension CompatibleWrapper where Base == icalproperty_action {
-    
-    /// wrap
-    /// - Returns: Property.Action
-    internal func wrap() -> Property.Action {
-        return .init(rawValue: base)
-    }
-}
-
-extension icalproperty_busytype: CompatibleValue {}
-extension CompatibleWrapper where Base == icalproperty_busytype {
-    
-    /// wrap
-    /// - Returns: Property.BusyType
-    internal func wrap() -> Property.BusyType {
-        return .init(rawValue: base)
-    }
-}
-
-extension icalproperty_carlevel: CompatibleValue {}
-extension CompatibleWrapper where Base == icalproperty_carlevel {
-    
-    /// wrap
-    /// - Returns: Property.CarLevel
-    internal func wrap() -> Property.CarLevel {
-        return .init(rawValue: base)
-    }
-}
-
-extension icalproperty_class: CompatibleValue {}
-extension CompatibleWrapper where Base == icalproperty_class {
-    
-    /// wrap
-    /// - Returns: Property.Class
-    internal func wrap() -> Property.Class {
-        return .init(rawValue: base)
-    }
-}
-
-extension icalproperty_cmd: CompatibleValue {}
-extension CompatibleWrapper where Base == icalproperty_cmd {
-    
-    /// wrap
-    /// - Returns: Property.Command
-    internal func wrap() -> Property.Command {
-        return .init(rawValue: base)
-    }
-}
-
 extension icaldurationtype: CompatibleValue {}
 extension CompatibleWrapper where Base == icaldurationtype {
-    
     /// wrap
     /// - Returns: Duration
     internal func wrap() -> Duration {
@@ -81,7 +29,6 @@ extension CompatibleWrapper where Base == icaldurationtype {
 
 extension icalperiodtype: CompatibleValue {}
 extension CompatibleWrapper where Base == icalperiodtype {
-    
     /// wrap
     /// - Returns: PeriodType
     internal func wrap() -> PeriodType {
@@ -91,7 +38,6 @@ extension CompatibleWrapper where Base == icalperiodtype {
 
 extension icalgeotype: CompatibleValue {}
 extension CompatibleWrapper where Base == icalgeotype {
-    
     /// wrap
     /// - Returns: CLLocationCoordinate2D
     internal func wrap() -> CLLocationCoordinate2D {
@@ -99,9 +45,71 @@ extension CompatibleWrapper where Base == icalgeotype {
     }
 }
 
+extension icaldatetimeperiodtype: CompatibleValue {}
+extension CompatibleWrapper where Base == icaldatetimeperiodtype {
+    /// wrap
+    /// - Returns: DateTimePeriodType
+    internal func wrap() -> DateTimePeriodType {
+        return .hub.from(base)
+    }
+}
+
+extension icaltriggertype: CompatibleValue {}
+extension CompatibleWrapper where Base == icaltriggertype {
+    /// wrap
+    /// - Returns: TriggerType
+    internal func wrap() -> TriggerType {
+        return .hub.from(base)
+    }
+}
+
+extension icalproperty_action: CompatibleValue {}
+extension CompatibleWrapper where Base == icalproperty_action {
+    /// wrap
+    /// - Returns: Property.Action
+    internal func wrap() -> Property.Action {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalproperty_busytype: CompatibleValue {}
+extension CompatibleWrapper where Base == icalproperty_busytype {
+    /// wrap
+    /// - Returns: Property.BusyType
+    internal func wrap() -> Property.BusyType {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalproperty_carlevel: CompatibleValue {}
+extension CompatibleWrapper where Base == icalproperty_carlevel {
+    /// wrap
+    /// - Returns: Property.CarLevel
+    internal func wrap() -> Property.CarLevel {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalproperty_class: CompatibleValue {}
+extension CompatibleWrapper where Base == icalproperty_class {
+    /// wrap
+    /// - Returns: Property.Class
+    internal func wrap() -> Property.Class {
+        return .init(rawValue: base)
+    }
+}
+
+extension icalproperty_cmd: CompatibleValue {}
+extension CompatibleWrapper where Base == icalproperty_cmd {
+    /// wrap
+    /// - Returns: Property.Command
+    internal func wrap() -> Property.Command {
+        return .init(rawValue: base)
+    }
+}
+
 extension icalproperty_method: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_method {
-    
     /// wrap
     /// - Returns: Property.Method
     internal func wrap() -> Property.Method {
@@ -111,7 +119,6 @@ extension CompatibleWrapper where Base == icalproperty_method {
 
 extension icalproperty_pollcompletion: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_pollcompletion {
-    
     /// wrap
     /// - Returns: Property.PollCompletion
     internal func wrap() -> Property.PollCompletion {
@@ -121,7 +128,6 @@ extension CompatibleWrapper where Base == icalproperty_pollcompletion {
 
 extension icalproperty_pollmode: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_pollmode {
-    
     /// wrap
     /// - Returns: Property.PollMode
     internal func wrap() -> Property.PollMode {
@@ -131,7 +137,6 @@ extension CompatibleWrapper where Base == icalproperty_pollmode {
 
 extension icalproperty_querylevel: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_querylevel {
-    
     /// wrap
     /// - Returns: Property.QueryLevel
     internal func wrap() -> Property.QueryLevel {
@@ -139,19 +144,8 @@ extension CompatibleWrapper where Base == icalproperty_querylevel {
     }
 }
 
-extension icaldatetimeperiodtype: CompatibleValue {}
-extension CompatibleWrapper where Base == icaldatetimeperiodtype {
-    
-    /// wrap
-    /// - Returns: DateTimePeriodType
-    internal func wrap() -> DateTimePeriodType {
-        return .hub.from(base)
-    }
-}
-
 extension icalproperty_status: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_status {
-    
     /// wrap
     /// - Returns: Property.Status
     internal func wrap() -> Property.Status {
@@ -161,7 +155,6 @@ extension CompatibleWrapper where Base == icalproperty_status {
 
 extension icalproperty_taskmode: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_taskmode {
-    
     /// wrap
     /// - Returns: Property.TaskMode
     internal func wrap() -> Property.TaskMode {
@@ -171,7 +164,6 @@ extension CompatibleWrapper where Base == icalproperty_taskmode {
 
 extension icalproperty_transp: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_transp {
-    
     /// wrap
     /// - Returns: Property.Transp
     internal func wrap() -> Property.Transp {
@@ -179,19 +171,8 @@ extension CompatibleWrapper where Base == icalproperty_transp {
     }
 }
 
-extension icaltriggertype: CompatibleValue {}
-extension CompatibleWrapper where Base == icaltriggertype {
-    
-    /// wrap
-    /// - Returns: TriggerType
-    internal func wrap() -> TriggerType {
-        return .hub.from(base)
-    }
-}
-
 extension icalproperty_xlicclass: CompatibleValue {}
 extension CompatibleWrapper where Base == icalproperty_xlicclass {
-    
     /// wrap
     /// - Returns: Property.XlicClass
     internal func wrap() -> Property.XlicClass {
@@ -201,7 +182,6 @@ extension CompatibleWrapper where Base == icalproperty_xlicclass {
 
 extension icalparameter_action: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_action {
-    
     /// wrap
     /// - Returns: Parameter.Action
     internal func wrap() -> Parameter.Action {
@@ -211,7 +191,6 @@ extension CompatibleWrapper where Base == icalparameter_action {
 
 extension icalparameter_cutype: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_cutype {
-    
     /// wrap
     /// - Returns: Parameter.CuType
     internal func wrap() -> Parameter.CuType {
@@ -221,7 +200,6 @@ extension CompatibleWrapper where Base == icalparameter_cutype {
 
 extension icalparameter_display: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_display {
-    
     /// wrap
     /// - Returns: Parameter.Display
     internal func wrap() -> Parameter.Display {
@@ -231,7 +209,6 @@ extension CompatibleWrapper where Base == icalparameter_display {
 
 extension icalparameter_enable: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_enable {
-    
     /// wrap
     /// - Returns: Parameter.Enable
     internal func wrap() -> Parameter.Enable {
@@ -241,7 +218,6 @@ extension CompatibleWrapper where Base == icalparameter_enable {
 
 extension icalparameter_encoding: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_encoding {
-    
     /// wrap
     /// - Returns: Parameter.Encoding
     internal func wrap() -> Parameter.Encoding {
@@ -251,7 +227,6 @@ extension CompatibleWrapper where Base == icalparameter_encoding {
 
 extension icalparameter_fbtype: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_fbtype {
-    
     /// wrap
     /// - Returns: Parameter.FbType
     internal func wrap() -> Parameter.FbType {
@@ -261,7 +236,6 @@ extension CompatibleWrapper where Base == icalparameter_fbtype {
 
 extension icalparameter_feature: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_feature {
-    
     /// wrap
     /// - Returns: Parameter.Feature
     internal func wrap() -> Parameter.Feature {
@@ -271,7 +245,6 @@ extension CompatibleWrapper where Base == icalparameter_feature {
 
 extension icalparameter_local: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_local {
-    
     /// wrap
     /// - Returns: Parameter.Local
     internal func wrap() -> Parameter.Local {
@@ -281,7 +254,6 @@ extension CompatibleWrapper where Base == icalparameter_local {
 
 extension icalparameter_partstat: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_partstat {
-    
     /// wrap
     /// - Returns: Parameter.Partstat
     internal func wrap() -> Parameter.Partstat {
@@ -291,7 +263,6 @@ extension CompatibleWrapper where Base == icalparameter_partstat {
 
 extension icalparameter_patchaction: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_patchaction {
-    
     /// wrap
     /// - Returns: Parameter.PatchAction
     internal func wrap() -> Parameter.PatchAction {
@@ -301,7 +272,6 @@ extension CompatibleWrapper where Base == icalparameter_patchaction {
 
 extension icalparameter_range: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_range {
-    
     /// wrap
     /// - Returns: Parameter.Range
     internal func wrap() -> Parameter.Range {
@@ -311,7 +281,6 @@ extension CompatibleWrapper where Base == icalparameter_range {
 
 extension icalparameter_related: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_related {
-    
     /// wrap
     /// - Returns: Parameter.Related
     internal func wrap() -> Parameter.Related {
@@ -321,7 +290,6 @@ extension CompatibleWrapper where Base == icalparameter_related {
 
 extension icalparameter_reltype: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_reltype {
-    
     /// wrap
     /// - Returns: Parameter.RelType
     internal func wrap() -> Parameter.RelType {
@@ -331,7 +299,6 @@ extension CompatibleWrapper where Base == icalparameter_reltype {
 
 extension icalparameter_required: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_required {
-    
     /// wrap
     /// - Returns: Parameter.Required
     internal func wrap() -> Parameter.Required {
@@ -341,7 +308,6 @@ extension CompatibleWrapper where Base == icalparameter_required {
 
 extension icalparameter_role: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_role {
-    
     /// wrap
     /// - Returns: Parameter.Role
     internal func wrap() -> Parameter.Role {
@@ -351,7 +317,6 @@ extension CompatibleWrapper where Base == icalparameter_role {
 
 extension icalparameter_rsvp: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_rsvp {
-    
     /// wrap
     /// - Returns: Parameter.RSVP
     internal func wrap() -> Parameter.RSVP {
@@ -361,7 +326,6 @@ extension CompatibleWrapper where Base == icalparameter_rsvp {
 
 extension icalparameter_scheduleagent: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_scheduleagent {
-    
     /// wrap
     /// - Returns: Parameter.ScheduleAgent
     internal func wrap() -> Parameter.ScheduleAgent {
@@ -371,7 +335,6 @@ extension CompatibleWrapper where Base == icalparameter_scheduleagent {
 
 extension icalparameter_scheduleforcesend: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_scheduleforcesend {
-    
     /// wrap
     /// - Returns: Parameter.ScheduleForceSend
     internal func wrap() -> Parameter.ScheduleForceSend {
@@ -381,7 +344,6 @@ extension CompatibleWrapper where Base == icalparameter_scheduleforcesend {
 
 extension icalparameter_stayinformed: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_stayinformed {
-    
     /// wrap
     /// - Returns: Parameter.StayInformed
     internal func wrap() -> Parameter.StayInformed {
@@ -391,7 +353,6 @@ extension CompatibleWrapper where Base == icalparameter_stayinformed {
 
 extension icalparameter_substate: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_substate {
-    
     /// wrap
     /// - Returns: Parameter.Substate
     internal func wrap() -> Parameter.Substate {
@@ -401,7 +362,6 @@ extension CompatibleWrapper where Base == icalparameter_substate {
 
 extension icalparameter_value: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_value {
-    
     /// wrap
     /// - Returns: Parameter.Value
     internal func wrap() -> Parameter.Value {
@@ -411,7 +371,6 @@ extension CompatibleWrapper where Base == icalparameter_value {
 
 extension icalparameter_xliccomparetype: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_xliccomparetype {
-    
     /// wrap
     /// - Returns: Parameter.XlicCompareType
     internal func wrap() -> Parameter.XlicCompareType {
@@ -421,7 +380,6 @@ extension CompatibleWrapper where Base == icalparameter_xliccomparetype {
 
 extension icalparameter_xlicerrortype: CompatibleValue {}
 extension CompatibleWrapper where Base == icalparameter_xlicerrortype {
-    
     /// wrap
     /// - Returns: Parameter.XlicErrorType
     internal func wrap() -> Parameter.XlicErrorType {
