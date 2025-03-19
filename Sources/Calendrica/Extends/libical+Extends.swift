@@ -225,7 +225,7 @@ extension icalproperty_kind: @retroactive CaseIterable {
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
-        if let first = icalcomponent_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
+        if let first = icalproperty_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
             self.init(first.rawValue)
         } else {
             return nil
@@ -549,7 +549,7 @@ extension icalparameter_kind: @retroactive CaseIterable {
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
-        if let first = icalcomponent_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
+        if let first = icalproperty_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
             self.init(first.rawValue)
         } else {
             return nil
@@ -969,7 +969,7 @@ extension icalvalue_kind: @retroactive CaseIterable {
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
-        if let first = icalcomponent_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
+        if let first = icalproperty_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
             self.init(first.rawValue)
         } else {
             return nil
