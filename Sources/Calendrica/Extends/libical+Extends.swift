@@ -9,6 +9,12 @@ import libical
 
 // MARK: - icalcomponent
 extension icalcomponent_kind: @retroactive CustomStringConvertible {
+    
+    /// String
+    public var name: String {
+        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_COMPONENT", with: "")
+    }
+    
     /// String
     public var description: String {
         switch self {
@@ -25,7 +31,7 @@ extension icalcomponent_kind: @retroactive CustomStringConvertible {
         case ICAL_VALARM_COMPONENT:             return "ICAL_VALARM_COMPONENT"
         case ICAL_XAUDIOALARM_COMPONENT:        return "ICAL_XAUDIOALARM_COMPONENT"
         case ICAL_XDISPLAYALARM_COMPONENT:      return "ICAL_XDISPLAYALARM_COMPONENT"
-        case ICAL_XEMAILALARM_COMPONENT:         return "ICAL_XEMAILALARM_COMPONENT"
+        case ICAL_XEMAILALARM_COMPONENT:        return "ICAL_XEMAILALARM_COMPONENT"
         case ICAL_XPROCEDUREALARM_COMPONENT:    return "ICAL_XPROCEDUREALARM_COMPONENT"
         case ICAL_VTIMEZONE_COMPONENT:          return "ICAL_VTIMEZONE_COMPONENT"
         case ICAL_XSTANDARD_COMPONENT:          return "ICAL_XSTANDARD_COMPONENT"
@@ -52,6 +58,12 @@ extension icalcomponent_kind: @retroactive CustomStringConvertible {
 
 // MARK: - icalproperty
 extension icalproperty_kind: @retroactive CustomStringConvertible {
+    
+    /// String
+    public var name: String {
+        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_PROPERTY", with: "")
+    }
+    
     /// String
     public var description: String {
         switch self {
@@ -425,6 +437,12 @@ extension icalproperty_xlicclass: @retroactive CustomStringConvertible {
 
 // MARK: - icalparameter
 extension icalparameter_kind: @retroactive CustomStringConvertible {
+    
+    /// String
+    public var name: String {
+        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_PARAMETER", with: "")
+    }
+    
     /// String
     public var description: String {
         switch self {
@@ -837,6 +855,12 @@ extension icalparameter_xlicerrortype: @retroactive CustomStringConvertible {
 
 // MARK: - icalvalue
 extension icalvalue_kind: @retroactive CustomStringConvertible {
+    
+    /// String
+    public var name: String {
+        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_VALUE", with: "")
+    }
+    
     /// String
     public var description: String {
         switch self {

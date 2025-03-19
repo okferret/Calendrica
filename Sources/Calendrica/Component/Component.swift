@@ -14,24 +14,15 @@ public class Component: CustomStringConvertible {
     // MARK: - 公开属性
     
     /// Kind
-    public var kind: Kind {
-        return .init(rawValue: icalcomponent_isa(rawValue))
-    }
-    
-    /// Array<Component>
-    public var children: Array<Component> {
-        return icalcomponent_find_all_components(of: rawValue, kind: .ANY)
-    }
-    
-    /// Array<Property>
-    public var properties: Array<Property> {
-        return icalcomponent_find_all_properties(of: rawValue, kind: .ANY)
-    }
-    
+    public var kind: Kind { .init(rawValue: icalcomponent_isa(rawValue)) }
     /// String
-    public var description: String {
-        return icalcomponent_as_ical_string(rawValue).hub.wrap()
-    }
+    public var name: String { kind.rawValue.name }
+    /// Array<Component>
+    public var children: Array<Component> { icalcomponent_find_all_components(of: rawValue, kind: .ANY) }
+    /// Array<Property>
+    public var properties: Array<Property> { icalcomponent_find_all_properties(of: rawValue, kind: .ANY) }
+    /// String
+    public var description: String { icalcomponent_as_ical_string(rawValue).hub.wrap() }
     
     // MARK: - 私有属性
     
@@ -73,6 +64,20 @@ extension Component {
     /// - Returns: Component
     public static func parseBody<T>(_ rfc5545: String) throws -> T where T: Component {
         return try parse(rfc5545)
+    }
+    
+    /// children of kind
+    /// - Parameter kind: Component.Kind
+    /// - Returns: Array<Component>
+    public func children<T>(of kind: Component.Kind) -> Array<T> where T: Component {
+        return icalcomponent_find_all_components(of: rawValue, kind: kind).compactMap { $0 as? T }
+    }
+    
+    /// child of kind
+    /// - Parameter kind: Component.Kind
+    /// - Returns: Optional<Component>
+    public func child<T>(of kind: Component.Kind) -> Optional<T> where T: Component {
+        return icalcomponent_find_first_component(of: rawValue, kind: kind) as? T
     }
     
     /// add child
@@ -119,20 +124,6 @@ extension Component {
         icalcomponent_find_all_properties(of: rawValue, kind: kind).forEach {
             icalcomponent_remove_property(rawValue, $0.rawValue)
         }
-    }
-    
-    /// components of kind
-    /// - Parameter kind: Component.Kind
-    /// - Returns: Array<Component>
-    public func components<T>(of kind: Component.Kind) -> Array<T> where T: Component {
-        return icalcomponent_find_all_components(of: rawValue, kind: kind).compactMap { $0 as? T }
-    }
-    
-    /// component of kind
-    /// - Parameter kind: Component.Kind
-    /// - Returns: Optional<Component>
-    public func component<T>(of kind: Component.Kind) -> Optional<T> where T: Component {
-        return icalcomponent_find_first_component(of: rawValue, kind: kind) as? T
     }
     
     /// property of kind

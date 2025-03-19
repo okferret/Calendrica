@@ -15,12 +15,10 @@ public class Parameter: CustomStringConvertible {
     
     /// Kind
     public var kind: Kind { .init(rawValue: icalparameter_isa(rawValue)) }
-
     /// String
-    public var description: String {
-        return icalparameter_as_ical_string(rawValue).hub.wrap()
-    }
-   
+    public var name: String { kind.rawValue.name }
+    /// String
+    public var description: String { icalparameter_as_ical_string(rawValue).hub.wrap() }
     
     // MARK: - 私有属性
     

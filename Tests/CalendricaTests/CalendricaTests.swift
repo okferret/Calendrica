@@ -78,7 +78,8 @@ import Foundation
     END:VCALENDAR
     """
     let calendar: Component = try .parseBody(newText)
-    if let first = calendar.component(of: .VEVENT)?.property(of: .DTSTART) {
+    print(calendar.name)
+    if let first = calendar.child(of: .VEVENT)?.property(of: .DTSTART) {
         try first.value(Date())
         print(first)
     }

@@ -16,16 +16,12 @@ public class Property: CustomStringConvertible {
     
     /// Kind
     public var kind: Kind { .init(rawValue: icalproperty_isa(rawValue)) }
-    
-    /// Array<Parameter>
-    public var parameters: Array<Parameter> {
-        return icalproperty_find_all_parameters(of: rawValue, kind: .ANY)
-    }
-    
     /// String
-    public var description: String {
-        return icalproperty_as_ical_string(rawValue).hub.wrap()
-    }
+    public var name: String { kind.rawValue.name }
+    /// Array<Parameter>
+    public var parameters: Array<Parameter> { icalproperty_find_all_parameters(of: rawValue, kind: .ANY) }
+    /// String
+    public var description: String { icalproperty_as_ical_string(rawValue).hub.wrap() }
     
     // MARK: - 私有属性
     
