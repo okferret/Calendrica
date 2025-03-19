@@ -13,25 +13,11 @@ extension Component {
 }
 
 extension Component.Kind {
-    /// String
-    public var name: String { rawValue.name }
-    /// String
-    public var text: String { rawValue.text }
     
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
         if let kind: icalcomponent_kind = .init(name: name) {
-            self.init(rawValue: kind)
-        } else {
-            return nil
-        }
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let kind: icalcomponent_kind = .init(text: text) {
             self.init(rawValue: kind)
         } else {
             return nil

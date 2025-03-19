@@ -9,12 +9,14 @@ import libical
 
 // MARK: - icalcomponent
 extension icalcomponent_kind: @retroactive CustomStringConvertible {
+    
     /// String
-    public var description: String { text }
+    public var name: String {
+        return icalcomponent_kind_to_string(self).hub.wrap()
+    }
+    
     /// String
-    public var name: String { icalcomponent_kind_to_string(self).hub.wrap() }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_NO_COMPONENT:                 return "ICAL_NO_COMPONENT"
         case ICAL_ANY_COMPONENT:                return "ICAL_ANY_COMPONENT"
@@ -55,18 +57,10 @@ extension icalcomponent_kind: @retroactive CustomStringConvertible {
 }
 
 extension icalcomponent_kind: @retroactive CaseIterable {
+    
     /// [icalcomponent_kind]
     public static var allCases: [icalcomponent_kind] {
-        return [
-            ICAL_NO_COMPONENT, ICAL_ANY_COMPONENT, ICAL_XROOT_COMPONENT, ICAL_XATTACH_COMPONENT,
-            ICAL_VEVENT_COMPONENT, ICAL_VTODO_COMPONENT, ICAL_VJOURNAL_COMPONENT, ICAL_VCALENDAR_COMPONENT,
-            ICAL_VAGENDA_COMPONENT, ICAL_VFREEBUSY_COMPONENT, ICAL_VALARM_COMPONENT, ICAL_XAUDIOALARM_COMPONENT,
-            ICAL_XDISPLAYALARM_COMPONENT, ICAL_XEMAILALARM_COMPONENT, ICAL_XPROCEDUREALARM_COMPONENT,
-            ICAL_VTIMEZONE_COMPONENT, ICAL_XSTANDARD_COMPONENT, ICAL_XDAYLIGHT_COMPONENT, ICAL_X_COMPONENT,
-            ICAL_VSCHEDULE_COMPONENT, ICAL_VQUERY_COMPONENT, ICAL_VREPLY_COMPONENT, ICAL_VCAR_COMPONENT,
-            ICAL_VCOMMAND_COMPONENT, ICAL_XLICINVALID_COMPONENT, ICAL_XLICMIMEPART_COMPONENT, ICAL_VAVAILABILITY_COMPONENT,
-            ICAL_XAVAILABLE_COMPONENT, ICAL_VPOLL_COMPONENT, ICAL_VVOTER_COMPONENT, ICAL_XVOTE_COMPONENT,
-            ICAL_VPATCH_COMPONENT, ICAL_XPATCH_COMPONENT
+        return [ICAL_NO_COMPONENT, ICAL_ANY_COMPONENT, ICAL_XROOT_COMPONENT, ICAL_XATTACH_COMPONENT, ICAL_VEVENT_COMPONENT, ICAL_VTODO_COMPONENT, ICAL_VJOURNAL_COMPONENT, ICAL_VCALENDAR_COMPONENT, ICAL_VAGENDA_COMPONENT, ICAL_VFREEBUSY_COMPONENT, ICAL_VALARM_COMPONENT, ICAL_XAUDIOALARM_COMPONENT, ICAL_XDISPLAYALARM_COMPONENT, ICAL_XEMAILALARM_COMPONENT, ICAL_XPROCEDUREALARM_COMPONENT, ICAL_VTIMEZONE_COMPONENT, ICAL_XSTANDARD_COMPONENT, ICAL_XDAYLIGHT_COMPONENT, ICAL_X_COMPONENT, ICAL_VSCHEDULE_COMPONENT, ICAL_VQUERY_COMPONENT, ICAL_VREPLY_COMPONENT, ICAL_VCAR_COMPONENT, ICAL_VCOMMAND_COMPONENT, ICAL_XLICINVALID_COMPONENT, ICAL_XLICMIMEPART_COMPONENT, ICAL_VAVAILABILITY_COMPONENT, ICAL_XAVAILABLE_COMPONENT, ICAL_VPOLL_COMPONENT, ICAL_VVOTER_COMPONENT, ICAL_XVOTE_COMPONENT, ICAL_VPATCH_COMPONENT, ICAL_XPATCH_COMPONENT,
         ]
     }
     
@@ -79,26 +73,18 @@ extension icalcomponent_kind: @retroactive CaseIterable {
             return nil
         }
     }
-    
-    /// 构建
-    /// - Parameter description: String
-    public init?(text: String) {
-        if let first = icalcomponent_kind.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(first.rawValue)
-        } else {
-            return nil
-        }
-    }
 }
 
 // MARK: - icalproperty
 extension icalproperty_kind: @retroactive CustomStringConvertible {
+    
     /// String
-    public var description: String { text }
+    public var name: String {
+        return icalproperty_kind_to_string(self).hub.wrap()
+    }
+    
     /// String
-    public var name: String { icalproperty_kind_to_string(self).hub.wrap() }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ANY_PROPERTY:                 return "ICAL_ANY_PROPERTY"
         case ICAL_ACCEPTRESPONSE_PROPERTY:      return "ICAL_ACCEPTRESPONSE_PROPERTY"
@@ -233,52 +219,13 @@ extension icalproperty_kind: @retroactive CustomStringConvertible {
 extension icalproperty_kind: @retroactive CaseIterable {
     /// [icalproperty_kind]
     public static var allCases: [icalproperty_kind] {
-        return [
-            ICAL_ANY_PROPERTY, ICAL_ACCEPTRESPONSE_PROPERTY, ICAL_ACKNOWLEDGED_PROPERTY, ICAL_ACTION_PROPERTY,
-            ICAL_ALLOWCONFLICT_PROPERTY, ICAL_ATTACH_PROPERTY, ICAL_ATTENDEE_PROPERTY, ICAL_BUSYTYPE_PROPERTY,
-            ICAL_CALID_PROPERTY, ICAL_CALMASTER_PROPERTY, ICAL_CALSCALE_PROPERTY, ICAL_CAPVERSION_PROPERTY,
-            ICAL_CARLEVEL_PROPERTY, ICAL_CARID_PROPERTY, ICAL_CATEGORIES_PROPERTY, ICAL_CLASS_PROPERTY,
-            ICAL_CMD_PROPERTY, ICAL_COLOR_PROPERTY, ICAL_COMMENT_PROPERTY, ICAL_COMPLETED_PROPERTY, ICAL_COMPONENTS_PROPERTY,
-            ICAL_CONFERENCE_PROPERTY, ICAL_CONTACT_PROPERTY, ICAL_CREATED_PROPERTY, ICAL_CSID_PROPERTY, ICAL_DATEMAX_PROPERTY,
-            ICAL_DATEMIN_PROPERTY, ICAL_DECREED_PROPERTY, ICAL_DEFAULTCHARSET_PROPERTY, ICAL_DEFAULTLOCALE_PROPERTY,
-            ICAL_DEFAULTTZID_PROPERTY, ICAL_DEFAULTVCARS_PROPERTY, ICAL_DENY_PROPERTY, ICAL_DESCRIPTION_PROPERTY,
-            ICAL_DTEND_PROPERTY, ICAL_DTSTAMP_PROPERTY, ICAL_DTSTART_PROPERTY, ICAL_DUE_PROPERTY, ICAL_DURATION_PROPERTY,
-            ICAL_ESTIMATEDDURATION_PROPERTY, ICAL_EXDATE_PROPERTY, ICAL_EXPAND_PROPERTY, ICAL_EXRULE_PROPERTY,
-            ICAL_FREEBUSY_PROPERTY, ICAL_GEO_PROPERTY, ICAL_GRANT_PROPERTY, ICAL_IMAGE_PROPERTY, ICAL_ITIPVERSION_PROPERTY,
-            ICAL_LASTMODIFIED_PROPERTY, ICAL_LOCATION_PROPERTY, ICAL_MAXCOMPONENTSIZE_PROPERTY, ICAL_MAXDATE_PROPERTY,
-            ICAL_MAXRESULTS_PROPERTY, ICAL_MAXRESULTSSIZE_PROPERTY, ICAL_METHOD_PROPERTY, ICAL_MINDATE_PROPERTY,
-            ICAL_MULTIPART_PROPERTY, ICAL_NAME_PROPERTY, ICAL_ORGANIZER_PROPERTY, ICAL_OWNER_PROPERTY, ICAL_PATCHDELETE_PROPERTY,
-            ICAL_PATCHORDER_PROPERTY, ICAL_PATCHPARAMETER_PROPERTY, ICAL_PATCHTARGET_PROPERTY, ICAL_PATCHVERSION_PROPERTY,
-            ICAL_PERCENTCOMPLETE_PROPERTY, ICAL_PERMISSION_PROPERTY, ICAL_POLLCOMPLETION_PROPERTY, ICAL_POLLITEMID_PROPERTY,
-            ICAL_POLLMODE_PROPERTY, ICAL_POLLPROPERTIES_PROPERTY, ICAL_POLLWINNER_PROPERTY, ICAL_PRIORITY_PROPERTY, ICAL_PRODID_PROPERTY,
-            ICAL_QUERY_PROPERTY, ICAL_QUERYLEVEL_PROPERTY, ICAL_QUERYID_PROPERTY, ICAL_QUERYNAME_PROPERTY, ICAL_RDATE_PROPERTY,
-            ICAL_RECURACCEPTED_PROPERTY, ICAL_RECUREXPAND_PROPERTY, ICAL_RECURLIMIT_PROPERTY, ICAL_RECURRENCEID_PROPERTY,
-            ICAL_REFRESHINTERVAL_PROPERTY, ICAL_RELATEDTO_PROPERTY, ICAL_RELCALID_PROPERTY, ICAL_REPEAT_PROPERTY, ICAL_REPLYURL_PROPERTY,
-            ICAL_REQUESTSTATUS_PROPERTY, ICAL_RESOURCES_PROPERTY, ICAL_RESPONSE_PROPERTY, ICAL_RESTRICTION_PROPERTY, ICAL_RRULE_PROPERTY,
-            ICAL_SCOPE_PROPERTY, ICAL_SEQUENCE_PROPERTY, ICAL_SOURCE_PROPERTY, ICAL_STATUS_PROPERTY, ICAL_STORESEXPANDED_PROPERTY,
-            ICAL_SUMMARY_PROPERTY, ICAL_TARGET_PROPERTY, ICAL_TASKMODE_PROPERTY, ICAL_TRANSP_PROPERTY, ICAL_TRIGGER_PROPERTY,
-            ICAL_TZID_PROPERTY, ICAL_TZIDALIASOF_PROPERTY, ICAL_TZNAME_PROPERTY, ICAL_TZOFFSETFROM_PROPERTY, ICAL_TZOFFSETTO_PROPERTY,
-            ICAL_TZUNTIL_PROPERTY, ICAL_TZURL_PROPERTY, ICAL_UID_PROPERTY, ICAL_URL_PROPERTY, ICAL_VERSION_PROPERTY, ICAL_VOTER_PROPERTY,
-            ICAL_X_PROPERTY, ICAL_XLICCLASS_PROPERTY, ICAL_XLICCLUSTERCOUNT_PROPERTY, ICAL_XLICERROR_PROPERTY, ICAL_XLICMIMECHARSET_PROPERTY,
-            ICAL_XLICMIMECID_PROPERTY, ICAL_XLICMIMECONTENTTYPE_PROPERTY, ICAL_XLICMIMEENCODING_PROPERTY, ICAL_XLICMIMEFILENAME_PROPERTY,
-            ICAL_XLICMIMEOPTINFO_PROPERTY, ICAL_NO_PROPERTY
-        ]
+        return [ICAL_ANY_PROPERTY, ICAL_ACCEPTRESPONSE_PROPERTY, ICAL_ACKNOWLEDGED_PROPERTY, ICAL_ACTION_PROPERTY, ICAL_ALLOWCONFLICT_PROPERTY, ICAL_ATTACH_PROPERTY, ICAL_ATTENDEE_PROPERTY, ICAL_BUSYTYPE_PROPERTY, ICAL_CALID_PROPERTY, ICAL_CALMASTER_PROPERTY, ICAL_CALSCALE_PROPERTY, ICAL_CAPVERSION_PROPERTY, ICAL_CARLEVEL_PROPERTY, ICAL_CARID_PROPERTY, ICAL_CATEGORIES_PROPERTY, ICAL_CLASS_PROPERTY, ICAL_CMD_PROPERTY, ICAL_COLOR_PROPERTY, ICAL_COMMENT_PROPERTY, ICAL_COMPLETED_PROPERTY, ICAL_COMPONENTS_PROPERTY, ICAL_CONFERENCE_PROPERTY, ICAL_CONTACT_PROPERTY, ICAL_CREATED_PROPERTY, ICAL_CSID_PROPERTY, ICAL_DATEMAX_PROPERTY, ICAL_DATEMIN_PROPERTY, ICAL_DECREED_PROPERTY, ICAL_DEFAULTCHARSET_PROPERTY, ICAL_DEFAULTLOCALE_PROPERTY, ICAL_DEFAULTTZID_PROPERTY, ICAL_DEFAULTVCARS_PROPERTY, ICAL_DENY_PROPERTY, ICAL_DESCRIPTION_PROPERTY, ICAL_DTEND_PROPERTY, ICAL_DTSTAMP_PROPERTY, ICAL_DTSTART_PROPERTY, ICAL_DUE_PROPERTY, ICAL_DURATION_PROPERTY, ICAL_ESTIMATEDDURATION_PROPERTY, ICAL_EXDATE_PROPERTY, ICAL_EXPAND_PROPERTY, ICAL_EXRULE_PROPERTY, ICAL_FREEBUSY_PROPERTY, ICAL_GEO_PROPERTY, ICAL_GRANT_PROPERTY, ICAL_IMAGE_PROPERTY, ICAL_ITIPVERSION_PROPERTY, ICAL_LASTMODIFIED_PROPERTY, ICAL_LOCATION_PROPERTY, ICAL_MAXCOMPONENTSIZE_PROPERTY, ICAL_MAXDATE_PROPERTY, ICAL_MAXRESULTS_PROPERTY, ICAL_MAXRESULTSSIZE_PROPERTY, ICAL_METHOD_PROPERTY, ICAL_MINDATE_PROPERTY, ICAL_MULTIPART_PROPERTY, ICAL_NAME_PROPERTY, ICAL_ORGANIZER_PROPERTY, ICAL_OWNER_PROPERTY, ICAL_PATCHDELETE_PROPERTY, ICAL_PATCHORDER_PROPERTY, ICAL_PATCHPARAMETER_PROPERTY, ICAL_PATCHTARGET_PROPERTY, ICAL_PATCHVERSION_PROPERTY, ICAL_PERCENTCOMPLETE_PROPERTY, ICAL_PERMISSION_PROPERTY, ICAL_POLLCOMPLETION_PROPERTY, ICAL_POLLITEMID_PROPERTY, ICAL_POLLMODE_PROPERTY, ICAL_POLLPROPERTIES_PROPERTY, ICAL_POLLWINNER_PROPERTY, ICAL_PRIORITY_PROPERTY, ICAL_PRODID_PROPERTY, ICAL_QUERY_PROPERTY, ICAL_QUERYLEVEL_PROPERTY, ICAL_QUERYID_PROPERTY, ICAL_QUERYNAME_PROPERTY, ICAL_RDATE_PROPERTY, ICAL_RECURACCEPTED_PROPERTY, ICAL_RECUREXPAND_PROPERTY, ICAL_RECURLIMIT_PROPERTY, ICAL_RECURRENCEID_PROPERTY, ICAL_REFRESHINTERVAL_PROPERTY, ICAL_RELATEDTO_PROPERTY, ICAL_RELCALID_PROPERTY, ICAL_REPEAT_PROPERTY, ICAL_REPLYURL_PROPERTY, ICAL_REQUESTSTATUS_PROPERTY, ICAL_RESOURCES_PROPERTY, ICAL_RESPONSE_PROPERTY, ICAL_RESTRICTION_PROPERTY, ICAL_RRULE_PROPERTY, ICAL_SCOPE_PROPERTY, ICAL_SEQUENCE_PROPERTY, ICAL_SOURCE_PROPERTY, ICAL_STATUS_PROPERTY, ICAL_STORESEXPANDED_PROPERTY, ICAL_SUMMARY_PROPERTY, ICAL_TARGET_PROPERTY, ICAL_TASKMODE_PROPERTY, ICAL_TRANSP_PROPERTY, ICAL_TRIGGER_PROPERTY, ICAL_TZID_PROPERTY, ICAL_TZIDALIASOF_PROPERTY, ICAL_TZNAME_PROPERTY, ICAL_TZOFFSETFROM_PROPERTY, ICAL_TZOFFSETTO_PROPERTY, ICAL_TZUNTIL_PROPERTY, ICAL_TZURL_PROPERTY, ICAL_UID_PROPERTY, ICAL_URL_PROPERTY, ICAL_VERSION_PROPERTY, ICAL_VOTER_PROPERTY, ICAL_X_PROPERTY, ICAL_XLICCLASS_PROPERTY, ICAL_XLICCLUSTERCOUNT_PROPERTY, ICAL_XLICERROR_PROPERTY, ICAL_XLICMIMECHARSET_PROPERTY, ICAL_XLICMIMECID_PROPERTY, ICAL_XLICMIMECONTENTTYPE_PROPERTY, ICAL_XLICMIMEENCODING_PROPERTY, ICAL_XLICMIMEFILENAME_PROPERTY, ICAL_XLICMIMEOPTINFO_PROPERTY, ICAL_NO_PROPERTY]
     }
     
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
-        if let first = icalproperty_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
-            self.init(first.rawValue)
-        } else {
-            return nil
-        }
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_kind.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
+        if let first = icalcomponent_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
             self.init(first.rawValue)
         } else {
             return nil
@@ -288,9 +235,7 @@ extension icalproperty_kind: @retroactive CaseIterable {
 
 extension icalproperty_action: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ACTION_X:         return "ICAL_ACTION_X"
         case ICAL_ACTION_AUDIO:     return "ICAL_ACTION_AUDIO"
@@ -303,28 +248,9 @@ extension icalproperty_action: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_action: @retroactive CaseIterable {
-    /// [icalproperty_action]
-    public static var allCases: [icalproperty_action] {
-        return [ICAL_ACTION_X, ICAL_ACTION_AUDIO, ICAL_ACTION_DISPLAY, ICAL_ACTION_EMAIL, ICAL_ACTION_PROCEDURE, ICAL_ACTION_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_action.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_busytype: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_BUSYTYPE_X:               return "ICAL_BUSYTYPE_X"
         case ICAL_BUSYTYPE_BUSY:            return "ICAL_BUSYTYPE_BUSY"
@@ -336,29 +262,9 @@ extension icalproperty_busytype: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_busytype: @retroactive CaseIterable {
-    /// [icalproperty_busytype]
-    public static var allCases: [icalproperty_busytype] {
-        return [ICAL_BUSYTYPE_X, ICAL_BUSYTYPE_BUSY, ICAL_BUSYTYPE_BUSYUNAVAILABLE, ICAL_BUSYTYPE_BUSYTENTATIVE, ICAL_BUSYTYPE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_busytype.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_carlevel: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_CARLEVEL_X:           return "ICAL_CARLEVEL_X"
         case ICAL_CARLEVEL_CARNONE:     return "ICAL_CARLEVEL_CARNONE"
@@ -370,29 +276,9 @@ extension icalproperty_carlevel: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_carlevel: @retroactive CaseIterable {
-    /// [icalproperty_carlevel]
-    public static var allCases: [icalproperty_carlevel] {
-        return [ICAL_CARLEVEL_X, ICAL_CARLEVEL_CARNONE, ICAL_CARLEVEL_CARMIN, ICAL_CARLEVEL_CARFULL1, ICAL_CARLEVEL_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_carlevel.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_class: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_CLASS_X:              return "ICAL_CLASS_X"
         case ICAL_CLASS_PUBLIC:         return "ICAL_CLASS_PUBLIC"
@@ -404,28 +290,9 @@ extension icalproperty_class: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_class: @retroactive CaseIterable {
-    /// [icalproperty_class]
-    public static var allCases: [icalproperty_class] {
-        return [ICAL_CLASS_X, ICAL_CLASS_PUBLIC, ICAL_CLASS_PRIVATE, ICAL_CLASS_CONFIDENTIAL, ICAL_CLASS_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_class.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_cmd: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_CMD_X:                return "ICAL_CMD_X"
         case ICAL_CMD_ABORT:            return "ICAL_CMD_ABORT"
@@ -446,32 +313,9 @@ extension icalproperty_cmd: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_cmd: @retroactive CaseIterable {
-    /// [icalproperty_cmd]
-    public static var allCases: [icalproperty_cmd] {
-        return [
-            ICAL_CMD_X, ICAL_CMD_ABORT, ICAL_CMD_CONTINUE, ICAL_CMD_CREATE, ICAL_CMD_DELETE,
-            ICAL_CMD_GENERATEUID, ICAL_CMD_GETCAPABILITY, ICAL_CMD_IDENTIFY, ICAL_CMD_MODIFY,
-            ICAL_CMD_MOVE, ICAL_CMD_REPLY, ICAL_CMD_SEARCH, ICAL_CMD_SETLOCALE, ICAL_CMD_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_cmd.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_method: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_METHOD_X:                 return "ICAL_METHOD_X"
         case ICAL_METHOD_PUBLISH:           return "ICAL_METHOD_PUBLISH"
@@ -497,33 +341,9 @@ extension icalproperty_method: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_method: @retroactive CaseIterable {
-    /// [icalproperty_method]
-    public static var allCases: [icalproperty_method] {
-        return [
-            ICAL_METHOD_X, ICAL_METHOD_PUBLISH, ICAL_METHOD_REQUEST, ICAL_METHOD_REPLY, ICAL_METHOD_ADD,
-            ICAL_METHOD_CANCEL, ICAL_METHOD_REFRESH, ICAL_METHOD_COUNTER, ICAL_METHOD_DECLINECOUNTER,
-            ICAL_METHOD_CREATE, ICAL_METHOD_READ, ICAL_METHOD_RESPONSE, ICAL_METHOD_MOVE, ICAL_METHOD_MODIFY,
-            ICAL_METHOD_GENERATEUID, ICAL_METHOD_DELETE, ICAL_METHOD_POLLSTATUS, ICAL_METHOD_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_method.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_pollcompletion: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_POLLCOMPLETION_X:             return "ICAL_POLLCOMPLETION_X"
         case ICAL_POLLCOMPLETION_SERVER:        return "ICAL_POLLCOMPLETION_SERVER"
@@ -536,32 +356,9 @@ extension icalproperty_pollcompletion: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_pollcompletion: @retroactive CaseIterable {
-    /// [icalproperty_pollcompletion]
-    public static var allCases: [icalproperty_pollcompletion] {
-        return [
-            ICAL_POLLCOMPLETION_X, ICAL_POLLCOMPLETION_SERVER, ICAL_POLLCOMPLETION_SERVERSUBMIT,
-            ICAL_POLLCOMPLETION_SERVERCHOICE, ICAL_POLLCOMPLETION_CLIENT, ICAL_POLLCOMPLETION_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_pollcompletion.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-    
-}
-
 extension icalproperty_pollmode: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_POLLMODE_X:       return "ICAL_POLLMODE_X"
         case ICAL_POLLMODE_BASIC:   return "ICAL_POLLMODE_BASIC"
@@ -571,29 +368,9 @@ extension icalproperty_pollmode: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_pollmode: @retroactive CaseIterable {
-    /// [icalproperty_pollmode]
-    public static var allCases: [icalproperty_pollmode] {
-        return [ICAL_POLLMODE_X, ICAL_POLLMODE_BASIC, ICAL_POLLMODE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_pollmode.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-    
-}
-
 extension icalproperty_querylevel: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_QUERYLEVEL_X:         return "ICAL_QUERYLEVEL_X"
         case ICAL_QUERYLEVEL_CALQL1:    return "ICAL_QUERYLEVEL_CALQL1"
@@ -604,28 +381,9 @@ extension icalproperty_querylevel: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_querylevel: @retroactive CaseIterable {
-    /// [icalproperty_querylevel]
-    public static var allCases: [icalproperty_querylevel] {
-        return [ICAL_QUERYLEVEL_X, ICAL_QUERYLEVEL_CALQL1, ICAL_QUERYLEVEL_CALQLNONE, ICAL_QUERYLEVEL_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_querylevel.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_status: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_STATUS_X:             return "ICAL_STATUS_X"
         case ICAL_STATUS_TENTATIVE:     return "ICAL_STATUS_TENTATIVE"
@@ -646,32 +404,9 @@ extension icalproperty_status: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_status: @retroactive CaseIterable {
-    /// [icalproperty_status]
-    public static var allCases: [icalproperty_status] {
-        return [
-            ICAL_STATUS_X, ICAL_STATUS_TENTATIVE, ICAL_STATUS_CONFIRMED, ICAL_STATUS_COMPLETED, ICAL_STATUS_NEEDSACTION,
-            ICAL_STATUS_CANCELLED, ICAL_STATUS_INPROCESS, ICAL_STATUS_DRAFT, ICAL_STATUS_FINAL, ICAL_STATUS_SUBMITTED,
-            ICAL_STATUS_PENDING, ICAL_STATUS_FAILED, ICAL_STATUS_DELETED, ICAL_STATUS_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_status.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_taskmode: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_TASKMODE_X:                   return "ICAL_TASKMODE_X"
         case ICAL_TASKMODE_AUTOMATICCOMPLETION: return "ICAL_TASKMODE_AUTOMATICCOMPLETION"
@@ -683,28 +418,9 @@ extension icalproperty_taskmode: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_taskmode: @retroactive CaseIterable {
-    /// [icalproperty_taskmode]
-    public static var allCases: [icalproperty_taskmode] {
-        return [ICAL_TASKMODE_X, ICAL_TASKMODE_AUTOMATICCOMPLETION, ICAL_TASKMODE_AUTOMATICFAILURE, ICAL_TASKMODE_AUTOMATICSTATUS, ICAL_TASKMODE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_taskmode.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_transp: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_TRANSP_X:                     return "ICAL_TRANSP_X"
         case ICAL_TRANSP_OPAQUE:                return "ICAL_TRANSP_OPAQUE"
@@ -717,28 +433,9 @@ extension icalproperty_transp: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_transp: @retroactive CaseIterable {
-    /// [icalproperty_transp]
-    public static var allCases: [icalproperty_transp] {
-        return [ICAL_TRANSP_X, ICAL_TRANSP_OPAQUE, ICAL_TRANSP_OPAQUENOCONFLICT, ICAL_TRANSP_TRANSPARENT, ICAL_TRANSP_TRANSPARENTNOCONFLICT, ICAL_TRANSP_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_transp.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalproperty_xlicclass: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_XLICCLASS_X:                      return "ICAL_XLICCLASS_X"
         case ICAL_XLICCLASS_PUBLISHNEW:             return "ICAL_XLICCLASS_PUBLISHNEW"
@@ -774,40 +471,16 @@ extension icalproperty_xlicclass: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalproperty_xlicclass: @retroactive CaseIterable {
-    /// [icalproperty_xlicclass]
-    public static var allCases: [icalproperty_xlicclass] {
-        return [
-            ICAL_XLICCLASS_X, ICAL_XLICCLASS_PUBLISHNEW, ICAL_XLICCLASS_PUBLISHUPDATE, ICAL_XLICCLASS_PUBLISHFREEBUSY,
-            ICAL_XLICCLASS_REQUESTNEW, ICAL_XLICCLASS_REQUESTUPDATE, ICAL_XLICCLASS_REQUESTRESCHEDULE, ICAL_XLICCLASS_REQUESTDELEGATE,
-            ICAL_XLICCLASS_REQUESTNEWORGANIZER, ICAL_XLICCLASS_REQUESTFORWARD, ICAL_XLICCLASS_REQUESTSTATUS,
-            ICAL_XLICCLASS_REQUESTFREEBUSY, ICAL_XLICCLASS_REPLYACCEPT, ICAL_XLICCLASS_REPLYDECLINE, ICAL_XLICCLASS_REPLYDELEGATE,
-            ICAL_XLICCLASS_REPLYCRASHERACCEPT, ICAL_XLICCLASS_REPLYCRASHERDECLINE, ICAL_XLICCLASS_ADDINSTANCE, ICAL_XLICCLASS_CANCELEVENT,
-            ICAL_XLICCLASS_CANCELINSTANCE, ICAL_XLICCLASS_CANCELALL, ICAL_XLICCLASS_REFRESH, ICAL_XLICCLASS_COUNTER,
-            ICAL_XLICCLASS_DECLINECOUNTER, ICAL_XLICCLASS_MALFORMED, ICAL_XLICCLASS_OBSOLETE, ICAL_XLICCLASS_MISSEQUENCED,
-            ICAL_XLICCLASS_UNKNOWN, ICAL_XLICCLASS_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalproperty_xlicclass.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-    
-}
-
 // MARK: - icalparameter
 extension icalparameter_kind: @retroactive CustomStringConvertible {
-    public var description: String { text }
+    
     /// String
-    public var name: String { icalparameter_kind_to_string(self).hub.wrap() }
+    public var name: String {
+        return icalparameter_kind_to_string(self).hub.wrap()
+    }
+    
     /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ANY_PARAMETER:                return "ICAL_ANY_PARAMETER"
         case ICAL_ACTIONPARAM_PARAMETER:        return "ICAL_ACTIONPARAM_PARAMETER"
@@ -876,17 +549,7 @@ extension icalparameter_kind: @retroactive CaseIterable {
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
-        if let first = icalparameter_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
-            self.init(first.rawValue)
-        } else {
-            return nil
-        }
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_kind.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
+        if let first = icalcomponent_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
             self.init(first.rawValue)
         } else {
             return nil
@@ -896,9 +559,7 @@ extension icalparameter_kind: @retroactive CaseIterable {
 
 extension icalparameter_action: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ACTIONPARAM_X:        return "ICAL_ACTIONPARAM_X"
         case ICAL_ACTIONPARAM_ASK:      return "ICAL_ACTIONPARAM_ASK"
@@ -909,28 +570,9 @@ extension icalparameter_action: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_action: @retroactive CaseIterable {
-    /// [icalparameter_action]
-    public static var allCases: [icalparameter_action] {
-        return [ICAL_ACTIONPARAM_X, ICAL_ACTIONPARAM_ASK, ICAL_ACTIONPARAM_ABORT, ICAL_ACTIONPARAM_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_action.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_cutype: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_CUTYPE_X:             return "ICAL_CUTYPE_X"
         case ICAL_CUTYPE_INDIVIDUAL:    return "ICAL_CUTYPE_INDIVIDUAL"
@@ -944,28 +586,9 @@ extension icalparameter_cutype: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_cutype: @retroactive CaseIterable {
-    /// [icalparameter_cutype]
-    public static var allCases: [icalparameter_cutype] {
-        return [ICAL_CUTYPE_X, ICAL_CUTYPE_INDIVIDUAL, ICAL_CUTYPE_GROUP, ICAL_CUTYPE_RESOURCE, ICAL_CUTYPE_ROOM, ICAL_CUTYPE_UNKNOWN, ICAL_CUTYPE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_cutype.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_display: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_DISPLAY_X:            return "ICAL_DISPLAY_X"
         case ICAL_DISPLAY_BADGE:        return "ICAL_DISPLAY_BADGE"
@@ -978,28 +601,9 @@ extension icalparameter_display: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_display: @retroactive CaseIterable {
-    /// [icalparameter_display]
-    public static var allCases: [icalparameter_display] {
-        return [ICAL_DISPLAY_X, ICAL_DISPLAY_BADGE, ICAL_DISPLAY_GRAPHIC, ICAL_DISPLAY_FULLSIZE, ICAL_DISPLAY_THUMBNAIL, ICAL_DISPLAY_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_display.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_enable: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ENABLE_X:     return "ICAL_ENABLE_X"
         case ICAL_ENABLE_TRUE:  return "ICAL_ENABLE_TRUE"
@@ -1010,28 +614,9 @@ extension icalparameter_enable: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_enable: @retroactive CaseIterable {
-    /// [icalparameter_enable]
-    public static var allCases: [icalparameter_enable] {
-        return [ICAL_ENABLE_X, ICAL_ENABLE_TRUE, ICAL_ENABLE_FALSE, ICAL_ENABLE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_enable.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_encoding: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ENCODING_X:       return "ICAL_ENCODING_X"
         case ICAL_ENCODING_8BIT:    return "ICAL_ENCODING_8BIT"
@@ -1042,28 +627,9 @@ extension icalparameter_encoding: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_encoding: @retroactive CaseIterable {
-    /// [icalparameter_encoding]
-    public static var allCases: [icalparameter_encoding] {
-        return [ICAL_ENCODING_X, ICAL_ENCODING_8BIT, ICAL_ENCODING_BASE64, ICAL_ENCODING_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_encoding.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_fbtype: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_FBTYPE_X:                 return "ICAL_FBTYPE_X"
         case ICAL_FBTYPE_FREE:              return "ICAL_FBTYPE_FREE"
@@ -1076,28 +642,9 @@ extension icalparameter_fbtype: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_fbtype: @retroactive CaseIterable {
-    /// [icalparameter_fbtype]
-    public static var allCases: [icalparameter_fbtype] {
-        return [ICAL_FBTYPE_X, ICAL_FBTYPE_FREE, ICAL_FBTYPE_BUSY, ICAL_FBTYPE_BUSYUNAVAILABLE, ICAL_FBTYPE_BUSYTENTATIVE, ICAL_FBTYPE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_fbtype.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_feature: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_FEATURE_X:            return "ICAL_FEATURE_X"
         case ICAL_FEATURE_AUDIO:        return "ICAL_FEATURE_AUDIO"
@@ -1113,31 +660,9 @@ extension icalparameter_feature: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_feature: @retroactive CaseIterable {
-    /// [icalparameter_feature]
-    public static var allCases: [icalparameter_feature] {
-        return [
-            ICAL_FEATURE_X, ICAL_FEATURE_AUDIO, ICAL_FEATURE_CHAT, ICAL_FEATURE_FEED, ICAL_FEATURE_MODERATOR,
-            ICAL_FEATURE_PHONE, ICAL_FEATURE_SCREEN, ICAL_FEATURE_VIDEO, ICAL_FEATURE_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_feature.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_local: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_LOCAL_X:      return "ICAL_LOCAL_X"
         case ICAL_LOCAL_TRUE:   return "ICAL_LOCAL_TRUE"
@@ -1148,28 +673,9 @@ extension icalparameter_local: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_local: @retroactive CaseIterable {
-    /// [icalparameter_local]
-    public static var allCases: [icalparameter_local] {
-        return [ICAL_LOCAL_X, ICAL_LOCAL_TRUE, ICAL_LOCAL_FALSE, ICAL_LOCAL_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_local.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_partstat: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_PARTSTAT_X:           return "ICAL_PARTSTAT_X"
         case ICAL_PARTSTAT_NEEDSACTION: return "ICAL_PARTSTAT_NEEDSACTION"
@@ -1186,32 +692,9 @@ extension icalparameter_partstat: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_partstat: @retroactive CaseIterable {
-    /// [icalparameter_partstat]
-    public static var allCases: [icalparameter_partstat] {
-        return [
-            ICAL_PARTSTAT_X, ICAL_PARTSTAT_NEEDSACTION, ICAL_PARTSTAT_ACCEPTED, ICAL_PARTSTAT_DECLINED,
-            ICAL_PARTSTAT_TENTATIVE, ICAL_PARTSTAT_DELEGATED, ICAL_PARTSTAT_COMPLETED, ICAL_PARTSTAT_INPROCESS,
-            ICAL_PARTSTAT_FAILED, ICAL_PARTSTAT_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_partstat.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_patchaction: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_PATCHACTION_X:        return "ICAL_PATCHACTION_X"
         case ICAL_PATCHACTION_CREATE:   return "ICAL_PATCHACTION_CREATE"
@@ -1224,28 +707,9 @@ extension icalparameter_patchaction: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_patchaction: @retroactive CaseIterable {
-    /// [icalparameter_patchaction]
-    public static var allCases: [icalparameter_patchaction] {
-        return [ICAL_PATCHACTION_X, ICAL_PATCHACTION_CREATE, ICAL_PATCHACTION_BYNAME, ICAL_PATCHACTION_BYVALUE, ICAL_PATCHACTION_BYPARAM, ICAL_PATCHACTION_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_patchaction.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_range: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_RANGE_X:              return "ICAL_RANGE_X"
         case ICAL_RANGE_THISANDPRIOR:   return "ICAL_RANGE_THISANDPRIOR"
@@ -1256,28 +720,9 @@ extension icalparameter_range: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_range: @retroactive CaseIterable {
-    /// [icalparameter_range]
-    public static var allCases: [icalparameter_range] {
-        return [ICAL_RANGE_X, ICAL_RANGE_THISANDPRIOR, ICAL_RANGE_THISANDFUTURE, ICAL_RANGE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_range.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_related: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_RELATED_X:        return "ICAL_RELATED_X"
         case ICAL_RELATED_START:    return "ICAL_RELATED_START"
@@ -1288,28 +733,9 @@ extension icalparameter_related: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_related: @retroactive CaseIterable {
-    /// [icalparameter_related]
-    public static var allCases: [icalparameter_related] {
-        return [ICAL_RELATED_X, ICAL_RELATED_START, ICAL_RELATED_END, ICAL_RELATED_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_related.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_reltype: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_RELTYPE_X:        return "ICAL_RELTYPE_X"
         case ICAL_RELTYPE_PARENT:   return "ICAL_RELTYPE_PARENT"
@@ -1322,28 +748,9 @@ extension icalparameter_reltype: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_reltype: @retroactive CaseIterable {
-    /// [icalparameter_reltype]
-    public static var allCases: [icalparameter_reltype] {
-        return [ICAL_RELTYPE_X, ICAL_RELTYPE_PARENT, ICAL_RELTYPE_CHILD, ICAL_RELTYPE_SIBLING, ICAL_RELTYPE_POLL, ICAL_RELTYPE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_reltype.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_required: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_REQUIRED_X:       return "ICAL_REQUIRED_X"
         case ICAL_REQUIRED_TRUE:    return "ICAL_REQUIRED_TRUE"
@@ -1354,28 +761,9 @@ extension icalparameter_required: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_required: @retroactive CaseIterable {
-    /// [icalparameter_required]
-    public static var allCases: [icalparameter_required] {
-        return [ICAL_REQUIRED_X, ICAL_REQUIRED_TRUE, ICAL_REQUIRED_FALSE, ICAL_REQUIRED_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_required.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_role: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ROLE_X:               return "ICAL_ROLE_X"
         case ICAL_ROLE_CHAIR:           return "ICAL_ROLE_CHAIR"
@@ -1388,28 +776,9 @@ extension icalparameter_role: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_role: @retroactive CaseIterable {
-    /// [icalparameter_role]
-    public static var allCases: [icalparameter_role] {
-        return [ICAL_ROLE_X, ICAL_ROLE_CHAIR, ICAL_ROLE_REQPARTICIPANT, ICAL_ROLE_OPTPARTICIPANT, ICAL_ROLE_NONPARTICIPANT, ICAL_ROLE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_role.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_rsvp: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_RSVP_X:       return "ICAL_RSVP_X"
         case ICAL_RSVP_TRUE:    return "ICAL_RSVP_TRUE"
@@ -1420,28 +789,9 @@ extension icalparameter_rsvp: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_rsvp: @retroactive CaseIterable {
-    /// [icalparameter_rsvp]
-    public static var allCases: [icalparameter_rsvp] {
-        return [ICAL_RSVP_X, ICAL_RSVP_TRUE, ICAL_RSVP_FALSE, ICAL_RSVP_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_rsvp.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_scheduleagent: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_SCHEDULEAGENT_X:      return "ICAL_SCHEDULEAGENT_X"
         case ICAL_SCHEDULEAGENT_SERVER: return "ICAL_SCHEDULEAGENT_SERVER"
@@ -1452,28 +802,9 @@ extension icalparameter_scheduleagent: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_scheduleagent: @retroactive CaseIterable {
-    /// [icalparameter_scheduleagent]
-    public static var allCases: [icalparameter_scheduleagent] {
-        return [ICAL_SCHEDULEAGENT_X, ICAL_SCHEDULEAGENT_SERVER, ICAL_SCHEDULEAGENT_CLIENT, ICAL_SCHEDULEAGENT_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_scheduleagent.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_scheduleforcesend: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_SCHEDULEFORCESEND_X:          return "ICAL_SCHEDULEFORCESEND_X"
         case ICAL_SCHEDULEFORCESEND_REQUEST:    return "ICAL_SCHEDULEFORCESEND_REQUEST"
@@ -1484,28 +815,9 @@ extension icalparameter_scheduleforcesend: @retroactive CustomStringConvertible 
     }
 }
 
-extension icalparameter_scheduleforcesend: @retroactive CaseIterable {
-    /// [icalparameter_scheduleforcesend]
-    public static var allCases: [icalparameter_scheduleforcesend] {
-        return [ICAL_SCHEDULEFORCESEND_X, ICAL_SCHEDULEFORCESEND_REQUEST, ICAL_SCHEDULEFORCESEND_REPLY, ICAL_SCHEDULEFORCESEND_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_scheduleforcesend.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_stayinformed: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_STAYINFORMED_X:       return "ICAL_STAYINFORMED_X"
         case ICAL_STAYINFORMED_TRUE:    return "ICAL_STAYINFORMED_TRUE"
@@ -1516,28 +828,9 @@ extension icalparameter_stayinformed: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_stayinformed: @retroactive CaseIterable {
-    /// [icalparameter_stayinformed]
-    public static var allCases: [icalparameter_stayinformed] {
-        return [ICAL_STAYINFORMED_X, ICAL_STAYINFORMED_TRUE, ICAL_STAYINFORMED_FALSE, ICAL_STAYINFORMED_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_stayinformed.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_substate: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_SUBSTATE_X:           return "ICAL_SUBSTATE_X"
         case ICAL_SUBSTATE_OK:          return "ICAL_SUBSTATE_OK"
@@ -1549,28 +842,9 @@ extension icalparameter_substate: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_substate: @retroactive CaseIterable {
-    /// [icalparameter_substate]
-    public static var allCases: [icalparameter_substate] {
-        return [ICAL_SUBSTATE_X, ICAL_SUBSTATE_OK, ICAL_SUBSTATE_ERROR, ICAL_SUBSTATE_SUSPENDED, ICAL_SUBSTATE_NONE]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_substate.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_value: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_VALUE_X:          return "ICAL_VALUE_X"
         case ICAL_VALUE_BINARY:     return "ICAL_VALUE_BINARY"
@@ -1593,33 +867,9 @@ extension icalparameter_value: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_value: @retroactive CaseIterable {
-    /// [icalparameter_value]
-    public static var allCases: [icalparameter_value] {
-        return [
-            ICAL_VALUE_X, ICAL_VALUE_BINARY, ICAL_VALUE_BOOLEAN, ICAL_VALUE_DATE, ICAL_VALUE_DURATION,
-            ICAL_VALUE_FLOAT, ICAL_VALUE_INTEGER, ICAL_VALUE_PERIOD, ICAL_VALUE_RECUR, ICAL_VALUE_TEXT,
-            ICAL_VALUE_URI, ICAL_VALUE_ERROR, ICAL_VALUE_DATETIME, ICAL_VALUE_UTCOFFSET,
-            ICAL_VALUE_CALADDRESS, ICAL_VALUE_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_value.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_xliccomparetype: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_XLICCOMPARETYPE_X:            return "ICAL_XLICCOMPARETYPE_X"
         case ICAL_XLICCOMPARETYPE_EQUAL:        return "ICAL_XLICCOMPARETYPE_EQUAL"
@@ -1637,32 +887,9 @@ extension icalparameter_xliccomparetype: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_xliccomparetype: @retroactive CaseIterable {
-    /// [icalparameter_xliccomparetype]
-    public static var allCases: [icalparameter_xliccomparetype] {
-        return [
-            ICAL_XLICCOMPARETYPE_X, ICAL_XLICCOMPARETYPE_EQUAL, ICAL_XLICCOMPARETYPE_NOTEQUAL, ICAL_XLICCOMPARETYPE_LESS,
-            ICAL_XLICCOMPARETYPE_GREATER, ICAL_XLICCOMPARETYPE_LESSEQUAL, ICAL_XLICCOMPARETYPE_GREATEREQUAL,
-            ICAL_XLICCOMPARETYPE_REGEX, ICAL_XLICCOMPARETYPE_ISNULL, ICAL_XLICCOMPARETYPE_ISNOTNULL, ICAL_XLICCOMPARETYPE_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_xliccomparetype.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 extension icalparameter_xlicerrortype: @retroactive CustomStringConvertible {
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_XLICERRORTYPE_X:                          return "ICAL_XLICERRORTYPE_X"
         case ICAL_XLICERRORTYPE_COMPONENTPARSEERROR:        return "ICAL_XLICERRORTYPE_COMPONENTPARSEERROR"
@@ -1680,37 +907,16 @@ extension icalparameter_xlicerrortype: @retroactive CustomStringConvertible {
     }
 }
 
-extension icalparameter_xlicerrortype: @retroactive CaseIterable {
-    
-    /// [icalparameter_xlicerrortype]
-    public static var allCases: [icalparameter_xlicerrortype] {
-        return [
-            ICAL_XLICERRORTYPE_X, ICAL_XLICERRORTYPE_COMPONENTPARSEERROR, ICAL_XLICERRORTYPE_PROPERTYPARSEERROR,
-            ICAL_XLICERRORTYPE_PARAMETERNAMEPARSEERROR, ICAL_XLICERRORTYPE_PARAMETERVALUEPARSEERROR,
-            ICAL_XLICERRORTYPE_VALUEPARSEERROR, ICAL_XLICERRORTYPE_INVALIDITIP, ICAL_XLICERRORTYPE_UNKNOWNVCALPROPERROR,
-            ICAL_XLICERRORTYPE_MIMEPARSEERROR, ICAL_XLICERRORTYPE_VCALPROPPARSEERROR, ICAL_XLICERRORTYPE_NONE
-        ]
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalparameter_xliccomparetype.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
-            self.init(rawValue: first.rawValue)
-        } else {
-            return nil
-        }
-    }
-}
-
 // MARK: - icalvalue
 extension icalvalue_kind: @retroactive CustomStringConvertible {
+    
     /// String
-    public var name: String { icalvalue_kind_to_string(self).hub.wrap() }
+    public var name: String {
+        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_VALUE", with: "")
+    }
+    
     /// String
-    public var description: String { text }
-    /// String
-    public var text: String {
+    public var description: String {
         switch self {
         case ICAL_ANY_VALUE:            return "ICAL_ANY_VALUE"
         case ICAL_ACTION_VALUE:         return "ICAL_ACTION_VALUE"
@@ -1763,17 +969,7 @@ extension icalvalue_kind: @retroactive CaseIterable {
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
-        if let first = icalvalue_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
-            self.init(first.rawValue)
-        } else {
-            return nil
-        }
-    }
-    
-    /// 构建
-    /// - Parameter text: String
-    public init?(text: String) {
-        if let first = icalvalue_kind.allCases.first(where: { $0.text.caseInsensitiveCompare(text) == .orderedSame }) {
+        if let first = icalcomponent_kind.allCases.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
             self.init(first.rawValue)
         } else {
             return nil
