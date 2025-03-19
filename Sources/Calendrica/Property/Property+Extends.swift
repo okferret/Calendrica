@@ -40,12 +40,26 @@ extension Property {
 }
 
 extension Property.Kind {
+    /// String
+    public var name: String { rawValue.name }
+    /// String
+    public var text: String { rawValue.text }
     
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
         if let kind: icalproperty_kind = .init(name: name) {
             self.init(rawValue: kind)
+        } else {
+            return nil
+        }
+    }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_kind = .init(text: text) {
+            self.init(rawValue: value)
         } else {
             return nil
         }
@@ -304,6 +318,21 @@ extension Property.Kind {
 }
 
 extension Property.Action {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_action = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Property.Action {
     /// ICAL_ACTION_X
     public static var X: Property.Action { .init(rawValue: ICAL_ACTION_X) }
     /// ICAL_ACTION_AUDIO
@@ -316,6 +345,21 @@ extension Property.Action {
     public static var PROCEDURE: Property.Action { .init(rawValue: ICAL_ACTION_PROCEDURE) }
     /// ICAL_ACTION_NONE
     public static var NONE: Property.Action { .init(rawValue: ICAL_ACTION_NONE) }
+}
+
+extension Property.BusyType {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_busytype = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.BusyType {
@@ -332,6 +376,21 @@ extension Property.BusyType {
 }
 
 extension Property.CarLevel {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_carlevel = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Property.CarLevel {
     /// ICAL_CARLEVEL_X
     public static var X: Property.CarLevel { .init(rawValue: ICAL_CARLEVEL_X) }
     /// ICAL_CARLEVEL_CARNONE
@@ -345,6 +404,21 @@ extension Property.CarLevel {
 }
 
 extension Property.Class {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_class = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Property.Class {
     /// ICAL_CLASS_X
     public static var X: Property.Class { .init(rawValue: ICAL_CLASS_X) }
     /// ICAL_CLASS_PUBLIC
@@ -355,6 +429,21 @@ extension Property.Class {
     public static var CONFIDENTIAL: Property.Class { .init(rawValue: ICAL_CLASS_CONFIDENTIAL) }
     /// ICAL_CLASS_NONE
     public static var NONE: Property.Class { .init(rawValue: ICAL_CLASS_NONE) }
+}
+
+extension Property.Command {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_cmd = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.Command {
@@ -386,6 +475,21 @@ extension Property.Command {
     public static var SETLOCALE: Property.Command { .init(rawValue: ICAL_CMD_SETLOCALE) }
     /// ICAL_CMD_NONE
     public static var NONE: Property.Command { .init(rawValue: ICAL_CMD_NONE) }
+}
+
+extension Property.Method {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_method = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.Method {
@@ -428,6 +532,21 @@ extension Property.Method {
 }
 
 extension Property.PollCompletion {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_pollcompletion = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Property.PollCompletion {
     /// ICAL_POLLCOMPLETION_X
     public static var X: Property.PollCompletion { .init(rawValue: ICAL_POLLCOMPLETION_X) }
     /// ICAL_POLLCOMPLETION_SERVER
@@ -443,12 +562,42 @@ extension Property.PollCompletion {
 }
 
 extension Property.PollMode {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_pollmode = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Property.PollMode {
     /// ICAL_POLLMODE_X
     public static var X: Property.PollMode { .init(rawValue: ICAL_POLLMODE_X) }
     /// ICAL_POLLMODE_BASIC
     public static var BASIC: Property.PollMode { .init(rawValue: ICAL_POLLMODE_BASIC) }
     /// ICAL_POLLMODE_NONE
     public static var NONE: Property.PollMode { .init(rawValue: ICAL_POLLMODE_NONE) }
+}
+
+extension Property.QueryLevel {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_querylevel = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.QueryLevel {
@@ -460,6 +609,21 @@ extension Property.QueryLevel {
     public static var CALQLNONE: Property.QueryLevel { .init(rawValue: ICAL_QUERYLEVEL_CALQLNONE) }
     /// ICAL_QUERYLEVEL_NONE
     public static var NONE: Property.QueryLevel { .init(rawValue: ICAL_QUERYLEVEL_NONE) }
+}
+
+extension Property.Status {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_status = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.Status {
@@ -494,6 +658,21 @@ extension Property.Status {
 }
 
 extension Property.TaskMode {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_taskmode = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Property.TaskMode {
     /// ICAL_TASKMODE_X
     public static var X: Property.TaskMode { .init(rawValue: ICAL_TASKMODE_X) }
     /// ICAL_TASKMODE_AUTOMATICCOMPLETION
@@ -504,6 +683,21 @@ extension Property.TaskMode {
     public static var AUTOMATICSTATUS: Property.TaskMode { .init(rawValue: ICAL_TASKMODE_AUTOMATICSTATUS) }
     /// ICAL_TASKMODE_NONE
     public static var NONE: Property.TaskMode { .init(rawValue: ICAL_TASKMODE_NONE) }
+}
+
+extension Property.Transp {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_transp = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.Transp {
@@ -519,6 +713,21 @@ extension Property.Transp {
     public static var TRANSPARENTNOCONFLICT: Property.Transp { .init(rawValue: ICAL_TRANSP_TRANSPARENTNOCONFLICT) }
     /// ICAL_TRANSP_NONE
     public static var NONE: Property.Transp { .init(rawValue: ICAL_TRANSP_NONE) }
+}
+
+extension Property.XlicClass {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalproperty_xlicclass = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Property.XlicClass {

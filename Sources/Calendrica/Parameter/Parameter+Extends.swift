@@ -60,12 +60,26 @@ extension Parameter {
 }
 
 extension Parameter.Kind {
+    /// String
+    public var name: String { rawValue.name }
+    /// String
+    public var text: String { rawValue.text }
     
     /// 构建
     /// - Parameter name: String
     public init?(name: String) {
         if let kind: icalparameter_kind = .init(name: name) {
             self.init(rawValue: kind)
+        } else {
+            return nil
+        }
+    }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_kind = .init(text: text) {
+            self.init(rawValue: value)
         } else {
             return nil
         }
@@ -178,6 +192,21 @@ extension Parameter.Kind {
 }
 
 extension Parameter.Action {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_action = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Action {
     /// ICAL_ACTIONPARAM_X
     public static var X: Parameter.Action { .init(rawValue: ICAL_ACTIONPARAM_X) }
     /// ICAL_ACTIONPARAM_ASK
@@ -186,6 +215,21 @@ extension Parameter.Action {
     public static var ABORT: Parameter.Action { .init(rawValue: ICAL_ACTIONPARAM_ABORT) }
     /// ICAL_ACTIONPARAM_NONE
     public static var NONE: Parameter.Action { .init(rawValue: ICAL_ACTIONPARAM_NONE) }
+}
+
+extension Parameter.CuType {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_cutype = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.CuType {
@@ -206,6 +250,21 @@ extension Parameter.CuType {
 }
 
 extension Parameter.Display {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_display = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Display {
     /// ICAL_DISPLAY_X
     public static var X: Parameter.Display { .init(rawValue: ICAL_DISPLAY_X) }
     /// ICAL_DISPLAY_BADGE
@@ -221,6 +280,21 @@ extension Parameter.Display {
 }
 
 extension Parameter.Enable {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_enable = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Enable {
     /// ICAL_ENABLE_X
     public static var X: Parameter.Enable { .init(rawValue: ICAL_ENABLE_X) }
     /// ICAL_ENABLE_TRUE
@@ -229,6 +303,21 @@ extension Parameter.Enable {
     public static var FALSE: Parameter.Enable { .init(rawValue: ICAL_ENABLE_FALSE) }
     /// ICAL_ENABLE_NONE
     public static var NONE: Parameter.Enable { .init(rawValue: ICAL_ENABLE_NONE) }
+}
+
+extension Parameter.Encoding {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_encoding = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.Encoding {
@@ -244,6 +333,21 @@ extension Parameter.Encoding {
 }
 
 extension Parameter.FbType {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_fbtype = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.FbType {
     /// ICAL_FBTYPE_X
     public static var X: Parameter.FbType { .init(rawValue: ICAL_FBTYPE_X) }
     /// ICAL_FBTYPE_FREE
@@ -256,6 +360,21 @@ extension Parameter.FbType {
     public static var BUSYTENTATIVE: Parameter.FbType { .init(rawValue: ICAL_FBTYPE_BUSYTENTATIVE) }
     /// ICAL_FBTYPE_NONE
     public static var NONE: Parameter.FbType { .init(rawValue: ICAL_FBTYPE_NONE) }
+}
+
+extension Parameter.Feature {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_feature = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.Feature {
@@ -280,6 +399,21 @@ extension Parameter.Feature {
 }
 
 extension Parameter.Local {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_local = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Local {
     /// ICAL_LOCAL_X
     public static var X: Parameter.Local { .init(rawValue: ICAL_LOCAL_X) }
     /// ICAL_LOCAL_TRUE
@@ -288,6 +422,21 @@ extension Parameter.Local {
     public static var FALSE: Parameter.Local { .init(rawValue: ICAL_LOCAL_FALSE) }
     /// ICAL_LOCAL_NONE
     public static var NONE: Parameter.Local { .init(rawValue: ICAL_LOCAL_NONE) }
+}
+
+extension Parameter.Partstat {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_partstat = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.Partstat {
@@ -314,6 +463,21 @@ extension Parameter.Partstat {
 }
 
 extension Parameter.PatchAction {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_patchaction = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.PatchAction {
     /// ICAL_PATCHACTION_X
     public static var X: Parameter.PatchAction { .init(rawValue: ICAL_PATCHACTION_X) }
     /// ICAL_PATCHACTION_CREATE
@@ -329,6 +493,21 @@ extension Parameter.PatchAction {
 }
 
 extension Parameter.Range {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_range = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Range {
     /// ICAL_RANGE_X
     public static var X: Parameter.Range { .init(rawValue: ICAL_RANGE_X) }
     /// ICAL_RANGE_THISANDPRIOR
@@ -340,6 +519,21 @@ extension Parameter.Range {
 }
 
 extension Parameter.Related {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_related = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Related {
     /// ICAL_RELATED_X
     public static var X: Parameter.Related { .init(rawValue: ICAL_RELATED_X) }
     /// ICAL_RELATED_START
@@ -348,6 +542,21 @@ extension Parameter.Related {
     public static var END: Parameter.Related { .init(rawValue: ICAL_RELATED_END) }
     /// ICAL_RELATED_NONE
     public static var NONE: Parameter.Related { .init(rawValue: ICAL_RELATED_NONE) }
+}
+
+extension Parameter.RelType {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_reltype = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.RelType {
@@ -366,6 +575,21 @@ extension Parameter.RelType {
 }
 
 extension Parameter.Required {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_required = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Required {
     /// ICAL_REQUIRED_X
     public static var X: Parameter.Required { .init(rawValue: ICAL_REQUIRED_X) }
     /// ICAL_REQUIRED_TRUE
@@ -374,6 +598,21 @@ extension Parameter.Required {
     public static var FALSE: Parameter.Required { .init(rawValue: ICAL_REQUIRED_FALSE) }
     /// ICAL_REQUIRED_NONE
     public static var NONE: Parameter.Required { .init(rawValue: ICAL_REQUIRED_NONE) }
+}
+
+extension Parameter.Role {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_role = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.Role {
@@ -392,6 +631,21 @@ extension Parameter.Role {
 }
 
 extension Parameter.RSVP {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_rsvp = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.RSVP {
     /// ICAL_RSVP_X
     public static var X: Parameter.RSVP { .init(rawValue: ICAL_RSVP_X) }
     /// ICAL_RSVP_TRUE
@@ -400,6 +654,21 @@ extension Parameter.RSVP {
     public static var FALSE: Parameter.RSVP { .init(rawValue: ICAL_RSVP_FALSE) }
     /// ICAL_RSVP_NONE
     public static var NONE: Parameter.RSVP { .init(rawValue: ICAL_RSVP_NONE) }
+}
+
+extension Parameter.ScheduleAgent {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_scheduleagent = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.ScheduleAgent {
@@ -414,6 +683,21 @@ extension Parameter.ScheduleAgent {
 }
 
 extension Parameter.ScheduleForceSend {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_scheduleforcesend = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.ScheduleForceSend {
     /// ICAL_SCHEDULEFORCESEND_X
     public static var X: Parameter.ScheduleForceSend { .init(rawValue: ICAL_SCHEDULEFORCESEND_X) }
     /// ICAL_SCHEDULEFORCESEND_REQUEST
@@ -422,6 +706,21 @@ extension Parameter.ScheduleForceSend {
     public static var REPLY: Parameter.ScheduleForceSend { .init(rawValue: ICAL_SCHEDULEFORCESEND_REPLY) }
     /// ICAL_SCHEDULEFORCESEND_NONE
     public static var NONE: Parameter.ScheduleForceSend { .init(rawValue: ICAL_SCHEDULEFORCESEND_NONE) }
+}
+
+extension Parameter.StayInformed {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_stayinformed = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.StayInformed {
@@ -436,6 +735,21 @@ extension Parameter.StayInformed {
 }
 
 extension Parameter.Substate {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_substate = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.Substate {
     /// ICAL_SUBSTATE_X
     public static var X: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_X) }
     /// ICAL_SUBSTATE_OK
@@ -446,6 +760,21 @@ extension Parameter.Substate {
     public static var SUSPENDED: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_SUSPENDED) }
     /// ICAL_SUBSTATE_NONE
     public static var NONE: Parameter.Substate { .init(rawValue: ICAL_SUBSTATE_NONE) }
+}
+
+extension Parameter.Value {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_value = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.Value {
@@ -485,6 +814,21 @@ extension Parameter.Value {
 }
 
 extension Parameter.XlicCompareType {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_xliccomparetype = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Parameter.XlicCompareType {
     /// ICAL_XLICCOMPARETYPE_X
     public static var X: Parameter.XlicCompareType { .init(rawValue: ICAL_XLICCOMPARETYPE_X) }
     /// ICAL_XLICCOMPARETYPE_EQUAL
@@ -507,6 +851,21 @@ extension Parameter.XlicCompareType {
     public static var ISNOTNULL: Parameter.XlicCompareType { .init(rawValue: ICAL_XLICCOMPARETYPE_ISNOTNULL) }
     /// ICAL_XLICCOMPARETYPE_NONE
     public static var NONE: Parameter.XlicCompareType { .init(rawValue: ICAL_XLICCOMPARETYPE_NONE) }
+}
+
+extension Parameter.XlicErrorType {
+    /// String
+    public var text: String { rawValue.text }
+    
+    /// 构建
+    /// - Parameter text: String
+    public init?(text: String) {
+        if let value: icalparameter_xlicerrortype = .init(text: text) {
+            self.init(rawValue: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension Parameter.XlicErrorType {
