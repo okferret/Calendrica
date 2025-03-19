@@ -71,41 +71,7 @@ public struct Wrap<T>: Hashable, CustomStringConvertible  where T: RawRepresenta
 /// - Parameter root: icalcomponent
 /// - Returns: Component
 func icalcomponent_wrap(_ root: icalcomponent) -> Component {
-    let kind: Component.Kind = .init(rawValue: icalcomponent_isa(root))
-    // next
-    switch kind {
-    case .XROOT:           return XRoot(rawValue: root)
-    case .XATTACH:         return XAttach(rawValue: root)
-    case .VEVENT:          return VEvent(rawValue: root)
-    case .VTODO:           return VTodo(rawValue: root)
-    case .VJOURNAL:        return VJournal(rawValue: root)
-    case .VCALENDAR:       return VCalendar(rawValue: root)
-    case .VAGENDA:         return VAgenda(rawValue: root)
-    case .VFREEBUSY:       return VFreebusy(rawValue: root)
-    case .VALARM:          return VAlarm(rawValue: root)
-    case .XAUDIOALARM:     return XAudioAlarm(rawValue: root)
-    case .XDISPLAYALARM:   return XDisplayAlarm(rawValue: root)
-    case .XEMAILALARM:     return XEmailAlarm(rawValue: root)
-    case .XPROCEDUREALARM: return XProcedureAlarm(rawValue: root)
-    case .VTIMEZONE:       return VTimeZone(rawValue: root)
-    case .XSTANDARD:       return XStandard(rawValue: root)
-    case .XDAYLIGHT:       return XDaylight(rawValue: root)
-    case .VSCHEDULE:       return VSchedule(rawValue: root)
-    case .VQUERY:          return VQuery(rawValue: root)
-    case .VREPLY:          return VReply(rawValue: root)
-    case .VCAR:            return VCar(rawValue: root)
-    case .VCOMMAND:        return VCommand(rawValue: root)
-    case .XLICINVALID:     return XLicInvalid(rawValue: root)
-    case .XLICMIMEPART:    return XLicMimePart(rawValue: root)
-    case .VAVAILABILITY:   return VAvailability(rawValue: root)
-    case .XAVAILABLE:      return XAvailable(rawValue: root)
-    case .VPOLL:           return VPoll(rawValue: root)
-    case .VVOTER:          return VVoter(rawValue: root)
-    case .XVOTE:           return XVote(rawValue: root)
-    case .VPATCH:          return VPatch(rawValue: root)
-    case .XPATCH:          return XPatch(rawValue: root)
-    default:               return Component(rawValue: root)
-    }
+    return .init(rawValue: root)
 }
 
 /// icalcomponent_find_all_components

@@ -19,7 +19,7 @@ public class Component: CustomStringConvertible {
     }
     
     /// Array<Component>
-    public var components: Array<Component> {
+    public var children: Array<Component> {
         return icalcomponent_find_all_components(of: rawValue, kind: .ANY)
     }
     
@@ -48,13 +48,13 @@ public class Component: CustomStringConvertible {
     
     /// 构建
     /// - Parameter rfc5545: String
-    internal init(rfc5545: String) {
+    public init(rfc5545: String) {
         self.rawValue = icalcomponent_new_from_string(rfc5545)
     }
     
     /// 构建
     /// - Parameter kind: Kind
-    internal init(kind: Kind) {
+    public init(kind: Kind) {
         self.rawValue = icalcomponent_new(kind.rawValue)
     }
     
@@ -79,15 +79,15 @@ extension Component {
     /// - Parameter child: Component
     /// - Returns: Component
     @discardableResult
-    public func add(_ component: Component) -> Component {
-        icalcomponent_add_component(rawValue, component.rawValue)
-        return component
+    public func add(_ child: Component) -> Component {
+        icalcomponent_add_component(rawValue, child.rawValue)
+        return child
     }
     
     /// remove child
     /// - Parameter child: Component
-    public func remove(_ component: Component) {
-        icalcomponent_remove_component(rawValue, component.rawValue)
+    public func remove(_ child: Component) {
+        icalcomponent_remove_component(rawValue, child.rawValue)
     }
     
     /// remove
@@ -97,7 +97,7 @@ extension Component {
             icalcomponent_remove_component(rawValue, $0.rawValue)
         }
     }
-    
+        
     /// addProperty
     /// - Parameter property: Property
     /// - Returns: Property
