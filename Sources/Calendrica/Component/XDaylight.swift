@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// XDaylight
 public class XDaylight: Component {
     // MARK: - 生命周期
     

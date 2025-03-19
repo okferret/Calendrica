@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VTimeZone
 public class VTimeZone: Component {
 
     // MARK: - 生命周期

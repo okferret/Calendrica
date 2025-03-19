@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VQuery
 public class VQuery: Component {
 
     // MARK: - 生命周期

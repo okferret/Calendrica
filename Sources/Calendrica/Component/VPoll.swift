@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VPoll
 public class VPoll: Component {
 
     // MARK: - 生命周期

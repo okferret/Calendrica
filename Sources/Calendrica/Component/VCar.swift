@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VCar
 public class VCar: Component {
 
     // MARK: - 生命周期

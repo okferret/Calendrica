@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VReply
 public class VReply: Component {
 
     // MARK: - 生命周期

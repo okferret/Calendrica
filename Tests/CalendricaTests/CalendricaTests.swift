@@ -78,13 +78,14 @@ import Foundation
     END:VCALENDAR
     """
     let cmpt: VCalendar = try .parseBody(newText)
-    if let first: Date = cmpt.component(of: .VEVENT)?.property(of: .DTSTART)?.getValue() {
+    if let first = cmpt.component(of: .VEVENT)?.property(of: .DTSTART) {
+        try first.value(Date())
         print(first)
     }
     
     cmpt.components.forEach { child in
         child.properties.forEach {
-            guard let value: Date = $0.getValue() else { return }
+            guard let value = $0.parameters.first?.value() else { return }
             print(value, $0.kind)
         }
     }

@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// XAudioAlarm
 public class XAudioAlarm: Component {
 
     // MARK: - 生命周期

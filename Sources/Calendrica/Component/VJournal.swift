@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VJournal
 public class VJournal: Component {
 
     // MARK: - 生命周期

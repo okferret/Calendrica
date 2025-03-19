@@ -9,21 +9,15 @@ import Foundation
 import libical
 
 /// Parameter
-public class Parameter: NSObject {
+public class Parameter: CustomStringConvertible {
  
     // MARK: - 公开属性
     
     /// Kind
     public var kind: Kind { .init(rawValue: icalparameter_isa(rawValue)) }
-    
-    /// Optional<Any>
-    public var value: Optional<Any> {
-        get { getValue() }
-        set { setValue(newValue) }
-    }
-    
+
     /// String
-    public override var description: String {
+    public var description: String {
         return icalparameter_as_ical_string(rawValue).hub.wrap()
     }
    
@@ -39,7 +33,6 @@ public class Parameter: NSObject {
     /// - Parameter rawValue: icalparameter
     internal init(rawValue: icalparameter) {
         self.rawValue = rawValue
-        super.init()
     }
     
     /// 构建
@@ -60,18 +53,29 @@ extension Parameter {
   
     /// value
     /// - Returns: Optional<T>
-    public func getValue<T>() -> Optional<T> {
+    public func value<T>() -> Optional<T> {
         return value(kind: kind) as? T
     }
-
+    
     /// setValue
     /// - Parameter value: T
-    public func setValue<T>(_ value: T) {
-        setValue(value, kind: kind)
+    public func value<T>(_ value: T) throws {
+        try setValue(value, kind: kind)
     }
-   
+    
+    /// value
+    /// - Returns: Optional<Any>
+    public func value() -> Optional<Any> {
+        return value(kind: kind)
+    }
+    
+    /// value
+    /// - Parameter value: Optional<Any>
+    public func value(_ value: Optional<Any>) throws {
+        try setValue(value, kind: kind)
+    }
 }
-
+ 
 extension Parameter {
 
     /// ACTIONPARAM
@@ -446,7 +450,7 @@ extension Parameter {
     /// - Parameters:
     ///   - value: Optional<Any>
     ///   - kind: Kind
-    private func setValue(_ value: Optional<Any>, kind: Kind) {
+    private func setValue(_ value: Optional<Any>, kind: Kind) throws {
         switch (kind, value) {
         case (.ACTIONPARAM, let value as Parameter.Action):                     icalparameter_set_actionparam(rawValue, value.rawValue)
         case (.ALTREP, let value as String):                                    icalparameter_set_altrep(rawValue, value)
@@ -499,7 +503,7 @@ extension Parameter {
         case (.X, let value as String):                                         icalparameter_set_x(rawValue, value)
         case (.XLICCOMPARETYPE, let value as Parameter.XlicCompareType):        icalparameter_set_xliccomparetype(rawValue, value.rawValue)
         case (.XLICERRORTYPE, let value as Parameter.XlicErrorType):            icalparameter_set_xlicerrortype(rawValue, value.rawValue)
-        default: break
+        default:                                                                throw CalError.custom("参数类型错误 => \(kind)")
         }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// XAvailable
 public class XAvailable: Component {
 
     // MARK: - 生命周期

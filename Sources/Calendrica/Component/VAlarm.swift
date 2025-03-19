@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VAlarm
 public class VAlarm: Component {
 
     // MARK: - 生命周期

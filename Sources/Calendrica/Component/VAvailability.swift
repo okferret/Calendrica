@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VAvailability
 public class VAvailability: Component {
 
     // MARK: - 生命周期

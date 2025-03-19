@@ -9,7 +9,7 @@ import Foundation
 import libical
 
 /// NSObject
-public class Component: NSObject {
+public class Component: CustomStringConvertible {
 
     // MARK: - 公开属性
     
@@ -29,7 +29,7 @@ public class Component: NSObject {
     }
     
     /// String
-    public override var description: String {
+    public var description: String {
         return icalcomponent_as_ical_string(rawValue).hub.wrap()
     }
     
@@ -44,21 +44,18 @@ public class Component: NSObject {
     /// - Parameter rawValue: icalcomponent
     internal init(rawValue: icalcomponent) {
         self.rawValue = rawValue
-        super.init()
     }
     
     /// 构建
     /// - Parameter rfc5545: String
     internal init(rfc5545: String) {
         self.rawValue = icalcomponent_new_from_string(rfc5545)
-        super.init()
     }
     
     /// 构建
     /// - Parameter kind: Kind
     internal init(kind: Kind) {
         self.rawValue = icalcomponent_new(kind.rawValue)
-        super.init()
     }
     
     deinit {

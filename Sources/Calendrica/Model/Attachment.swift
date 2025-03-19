@@ -8,7 +8,7 @@
 import libical
 
 /// Attachment
-public class Attachment: NSObject {
+public class Attachment {
 
     // MARK: - 公开属性
     
@@ -26,7 +26,6 @@ public class Attachment: NSObject {
     /// - Parameter rawValue: icalattach
     internal init(rawValue: icalattach) {
         self.rawValue = rawValue
-        super.init()
     }
     
     /// 构建

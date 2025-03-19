@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VPatch
 public class VPatch: Component {
 
     // MARK: - 生命周期

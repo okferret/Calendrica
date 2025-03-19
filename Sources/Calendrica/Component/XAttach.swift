@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// XAttach
 public class XAttach: Component {
 
     // MARK: - 生命周期

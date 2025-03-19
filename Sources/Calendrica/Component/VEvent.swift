@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VEvent
 public class VEvent: Component {
 
     // MARK: - 生命周期

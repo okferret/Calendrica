@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VFreebusy
 public class VFreebusy: Component {
 
     // MARK: - 生命周期

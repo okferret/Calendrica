@@ -57,6 +57,16 @@ extension icalvalue_kind: @retroactive Hashable {}
 
 extension icalrequeststatus: @retroactive Hashable {}
 
+/// Wrap
+public struct Wrap<T>: Hashable, CustomStringConvertible  where T: RawRepresentable, T: Hashable, T: CustomStringConvertible {
+    public var description: String { rawValue.description }
+    internal let rawValue: T
+    internal init(rawValue: T) {
+        self.rawValue = rawValue
+    }
+}
+
+
 /// icalcomponent_wrap
 /// - Parameter root: icalcomponent
 /// - Returns: Component

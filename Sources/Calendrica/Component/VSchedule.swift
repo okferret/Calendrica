@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VSchedule
 public class VSchedule: Component {
 
     // MARK: - 生命周期

@@ -10,7 +10,7 @@ import libical
 import CoreLocation
 
 /// Property
-public class Property: NSObject {
+public class Property: CustomStringConvertible {
 
     // MARK: - 公开属性
     
@@ -22,14 +22,8 @@ public class Property: NSObject {
         return icalproperty_find_all_parameters(of: rawValue, kind: .ANY)
     }
     
-    /// Optional<Any>
-    public var value: Optional<Any> {
-        get { getValue() }
-        set { setValue(newValue) }
-    }
-    
     /// String
-    public override var description: String {
+    public var description: String {
         return icalproperty_as_ical_string(rawValue).hub.wrap()
     }
     
@@ -44,7 +38,6 @@ public class Property: NSObject {
     /// - Parameter rawValue: icalproperty
     internal init(rawValue: icalproperty) {
         self.rawValue = rawValue
-        super.init()
     }
     
     /// 构建
@@ -111,14 +104,26 @@ extension Property {
     
     /// value
     /// - Returns: Optional<T>
-    public func getValue<T>() -> Optional<T> {
+    public func value<T>() -> Optional<T> {
         return value(kind: kind) as? T
     }
-  
+    
     /// setValue
     /// - Parameter value: T
-    public func setValue<T>(_ value: T) {
-        setValue(value, kind: kind)
+    public func value<T>(_ value: T) throws {
+        try setValue(value, kind: kind)
+    }
+    
+    /// value
+    /// - Returns: Optional<Any>
+    public func value() -> Optional<Any> {
+        return value(kind: kind)
+    }
+    
+    /// value
+    /// - Parameter value: Optional<Any>
+    public func value(_ value: Optional<Any>) throws {
+        try setValue(value, kind: kind)
     }
     
 }
@@ -1004,7 +1009,7 @@ extension Property {
     /// - Parameters:
     ///   - value: Optional<Any>
     ///   - kind: Kind
-    private func setValue(_ value: Optional<Any>, kind: Kind) {
+    private func setValue(_ value: Optional<Any>, kind: Kind) throws {
         switch (kind, value) {
         case (.ACCEPTRESPONSE, let value as String):                    icalproperty_set_acceptresponse(rawValue, value)
         case (.ACKNOWLEDGED, let value as Date):                        icalproperty_set_acknowledged(rawValue, value.hub.icaltimetype())
@@ -1146,7 +1151,7 @@ extension Property {
         case (.XLICMIMEENCODING, let value as String):                  icalproperty_set_xlicmimeencoding(rawValue, value)
         case (.XLICMIMEFILENAME, let value as String):                  icalproperty_set_xlicmimefilename(rawValue, value)
         case (.XLICMIMEOPTINFO, let value as String):                   icalproperty_set_xlicmimeoptinfo(rawValue, value)
-        default: break
+        default:                                                        throw CalError.custom("参数类型错误 => \(kind)")
         }
     }
 }

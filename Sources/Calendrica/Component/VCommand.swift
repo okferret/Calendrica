@@ -8,6 +8,7 @@
 import Foundation
 import libical
 
+/// VCommand
 public class VCommand: Component {
 
     // MARK: - 生命周期
