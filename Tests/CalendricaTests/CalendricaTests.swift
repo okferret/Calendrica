@@ -79,12 +79,12 @@ import Foundation
     """
     let calendar: Component = try .parseBody(newText)
     print(calendar.name)
-    if let first = calendar.child(of: .VEVENT)?.property(of: .DTSTART) {
+    if let first = calendar.component(of: .VEVENT)?.property(of: .DTSTART) {
         try first.value(Date())
         print(first)
     }
     
-    calendar.children.forEach { child in
+    calendar.components.forEach { child in
         child.properties.forEach {
             guard let value = $0.parameters.first?.value() else { return }
             print(value, $0.kind)

@@ -11,6 +11,8 @@ import libical
 extension Parameter {
     /// Wrap<icalparameter_kind>
     public typealias Kind = Wrap<icalparameter_kind>
+    /// Key
+    public typealias Key = Kind
     /// Wrap<icalparameter_action>
     public typealias Action = Wrap<icalparameter_action>
     /// Wrap<icalparameter_cutype>

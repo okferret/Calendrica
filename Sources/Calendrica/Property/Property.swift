@@ -19,7 +19,7 @@ public class Property: CustomStringConvertible {
     /// String
     public var name: String { kind.rawValue.name }
     /// Array<Parameter>
-    public var parameters: Array<Parameter> { icalproperty_find_all_parameters(of: rawValue, kind: .ANY) }
+    public var parameters: Array<Parameter> { icalproperty_find_all_parameters(for: rawValue, kind: .ANY) }
     /// String
     public var description: String { icalproperty_as_ical_string(rawValue).hub.wrap() }
     
@@ -88,14 +88,14 @@ extension Property {
     /// - Parameter kind: Parameter.Kind
     /// - Returns: Array<Parameter>
     public func parameters(of kind: Parameter.Kind) -> Array<Parameter> {
-        return icalproperty_find_all_parameters(of: rawValue, kind: kind)
+        return icalproperty_find_all_parameters(for: rawValue, kind: kind)
     }
     
     /// parameter of kind
     /// - Parameter kind: Parameter.Kind
     /// - Returns: Optional<Parameter>
     public func parameter(of kind: Parameter.Kind) -> Optional<Parameter> {
-        return icalproperty_find_first_parameter(of: rawValue, kind: kind)
+        return icalproperty_find_first_parameter(for: rawValue, kind: kind)
     }
     
     /// value

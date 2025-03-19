@@ -12,7 +12,7 @@ extension icalcomponent_kind: @retroactive CustomStringConvertible {
     
     /// String
     public var name: String {
-        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_COMPONENT", with: "")
+        return icalcomponent_kind_to_string(self).hub.wrap()
     }
     
     /// String
@@ -61,7 +61,7 @@ extension icalproperty_kind: @retroactive CustomStringConvertible {
     
     /// String
     public var name: String {
-        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_PROPERTY", with: "")
+        return icalproperty_kind_to_string(self).hub.wrap()
     }
     
     /// String
@@ -440,7 +440,7 @@ extension icalparameter_kind: @retroactive CustomStringConvertible {
     
     /// String
     public var name: String {
-        return description.replacingOccurrences(of: "ICAL_", with: "").replacingOccurrences(of: "_PARAMETER", with: "")
+        return icalparameter_kind_to_string(self).hub.wrap()
     }
     
     /// String

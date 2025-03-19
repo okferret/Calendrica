@@ -11,6 +11,8 @@ import libical
 extension Property {
     /// Wrap<icalproperty_kind>
     public typealias Kind = Wrap<icalproperty_kind>
+    /// Key
+    public typealias Key = Kind
     /// Wrap<icalproperty_action>
     public typealias Action = Wrap<icalproperty_action>
     /// Wrap<icalproperty_busytype>

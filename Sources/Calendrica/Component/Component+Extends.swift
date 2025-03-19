@@ -10,6 +10,8 @@ import libical
 extension Component {
     /// Wrap<icalcomponent_kind>
     public typealias Kind = Wrap<icalcomponent_kind>
+    /// Key
+    public typealias Key = Kind
 }
 
 extension Component.Kind {
