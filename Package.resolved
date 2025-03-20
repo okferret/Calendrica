@@ -6,7 +6,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/okferret/libical.git",
       "state" : {
-        "revision" : "5c68380950d2df059381eaa68aaede399cf047b1",
+        "revision" : "b570aecbf80cb18ba2bd0caa25064f60609f6a43",
         "version" : "3.0.20"
       }
     }
