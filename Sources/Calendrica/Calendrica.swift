@@ -177,3 +177,10 @@ public func parse<T>(_ rfc5545: String) throws -> T where T: Component {
 }
 
 
+/// isValid
+/// - Parameter rfc5545: String
+/// - Returns: Bool
+public func isValid(_ rfc5545: String) -> Bool {
+    guard let cmpt = icalparser_parse_string(rfc5545) else { return false }
+    return icalcomponent_is_valid(cmpt) > 0
+}
