@@ -173,4 +173,7 @@ public func parse<T>(_ rfc5545: String) throws -> T where T: Component {
     } else {
         throw CalError.custom("\(T.self) 解析失败")
     }
+    
 }
+
+

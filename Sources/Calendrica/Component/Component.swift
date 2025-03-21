@@ -38,12 +38,6 @@ public class Component: CustomStringConvertible {
     }
     
     /// 构建
-    /// - Parameter rfc5545: String
-    public init(rfc5545: String) {
-        self.rawValue = icalcomponent_new_from_string(rfc5545)
-    }
-    
-    /// 构建
     /// - Parameter kind: Kind
     public init(kind: Kind) {
         self.rawValue = icalcomponent_new(kind.rawValue)
@@ -145,3 +139,15 @@ extension Component {
     }
     
 }
+
+extension Component {
+    
+    /// isValid
+    /// - Parameter rfc5545: String
+    /// - Returns: Bool
+    public static func isValid(_ rfc5545: String) -> Bool {
+        guard let cmpt = icalparser_parse_string(rfc5545) else { return false }
+        return icalcomponent_is_valid(cmpt) > 0 
+    }
+}
+

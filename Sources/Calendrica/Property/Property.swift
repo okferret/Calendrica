@@ -37,12 +37,6 @@ public class Property: CustomStringConvertible {
     }
     
     /// 构建
-    /// - Parameter rfc5545: String
-    public convenience init(rfc5545: String) {
-        self.init(rawValue: icalproperty_new_from_string(rfc5545))
-    }
-    
-    /// 构建
     /// - Parameter kind: Kind
     public convenience init(kind: Kind) {
         self.init(rawValue: icalproperty_new(kind.rawValue))

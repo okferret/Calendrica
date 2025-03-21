@@ -32,13 +32,7 @@ public class Parameter: CustomStringConvertible {
     internal init(rawValue: icalparameter) {
         self.rawValue = rawValue
     }
-    
-    /// 构建
-    /// - Parameter rfc5545: String
-    public convenience init(rfc5545: String) {
-        self.init(rawValue: icalparameter_new_from_string(rfc5545))
-    }
-    
+
     /// 构建
     /// - Parameter kind: Kind
     public convenience init(kind: Kind) {
