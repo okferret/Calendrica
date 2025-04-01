@@ -14,7 +14,13 @@ extension CompatibleWrapper where Base == TimeInterval {
     /// - Parameter icaldurationtype: libical.icaldurationtype
     /// - Returns: TimeInterval
     internal static func from(_ icaldurationtype: libical.icaldurationtype) -> TimeInterval {
-        return 0
+        var totalUnitCount: TimeInterval = 0.0
+        totalUnitCount += TimeInterval(icaldurationtype.weeks) * 60 * 60 * 24 * 7   // 周 -> 秒
+        totalUnitCount += TimeInterval(icaldurationtype.days) * 60 * 60 * 24        // 天 -> 秒
+        totalUnitCount += TimeInterval(icaldurationtype.hours) * 60 * 60            // 小时 -> 秒
+        totalUnitCount += TimeInterval(icaldurationtype.minutes) * 60               // 分钟 -> 秒
+        totalUnitCount += TimeInterval(icaldurationtype.seconds)                    // 秒 -> 秒
+        return abs(totalUnitCount)
     }
     
     /// icaldurationtype
