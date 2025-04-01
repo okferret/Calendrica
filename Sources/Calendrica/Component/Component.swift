@@ -52,14 +52,7 @@ public class Component: CustomStringConvertible {
 }
 
 extension Component {
-    
-    /// parseBody
-    /// - Parameter rfc5545: String
-    /// - Returns: Component
-    public static func parseBody<T>(_ rfc5545: String) throws -> T where T: Component {
-        return try parse(rfc5545)
-    }
-    
+
     /// components for kind
     /// - Parameter kind: Component.Kind
     /// - Returns: Array<Component>
@@ -148,6 +141,14 @@ extension Component {
     public static func isValid(_ rfc5545: String) -> Bool {
         guard let cmpt = icalparser_parse_string(rfc5545) else { return false }
         return icalcomponent_is_valid(cmpt) > 0 
+    }
+    
+    
+    /// parseBodyFragment
+    /// - Parameter rfc5545: String
+    /// - Returns: Component
+    public static func parseBodyFragment<T>(_ rfc5545: String) throws -> T where T: Component {
+        return try parse(rfc5545)
     }
 }
 

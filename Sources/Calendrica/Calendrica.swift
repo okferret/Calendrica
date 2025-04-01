@@ -168,6 +168,7 @@ public func parse<T>(_ rfc5545: String) throws -> T where T: Component {
     guard icalcomponent_is_valid(cmpt) > 0 else {
         throw CalError.custom("当前RFC5545不合法")
     }
+    // next
     if let newObj = icalcomponent_wrap(cmpt) as? T {
         return newObj
     } else {
